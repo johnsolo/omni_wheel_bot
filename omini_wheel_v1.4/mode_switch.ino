@@ -5,7 +5,7 @@ void mode_switch()
     if (mode_input == "do")
     {
       // Serial.print(mode_input);
-      do_flag=1;
+      do_flag = 1;
       Serial.println("do");
       flag = 0;
 
@@ -13,21 +13,21 @@ void mode_switch()
     }
     else if (mode_input == "teach")
     {
-      teach_flag=1;
+      teach_flag = 1;
       Serial.print(mode_input);
       Serial.println("teach");
       teach();
     }
     else if (mode_input == "learn")
-    { 
-      learn_flag=1;
+    {
+      learn_flag = 1;
       Serial.print(mode_input);
       Serial.println("learn");
       learn();
     }
     else if (mode_input == "play")
     {
-      play_flag=1;
+      play_flag = 1;
       Serial.println("play");
       mode_input = "";
       play();

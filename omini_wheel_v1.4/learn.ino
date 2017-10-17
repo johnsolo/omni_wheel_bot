@@ -1,5 +1,5 @@
 void learn()
-{ Serial.println("enter into the do");
+{ Serial.println("enter into the learn");
   memset (ble_input, '\0', sizeof(ble_input));
   int start_flag;
   serial_flush();
@@ -33,12 +33,12 @@ void learn()
             }
             else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
-        
+
             break;
           case 'b':
             Serial.println("back");
@@ -52,11 +52,11 @@ void learn()
               RFID_Data = "\0";
               count1 = 0;
             }
-             else
+            else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
             break;
@@ -71,11 +71,11 @@ void learn()
               RFID_Data = "\0";
               count1 = 0;
             }
-             else
+            else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
             break;
@@ -90,11 +90,11 @@ void learn()
               RFID_Data = "\0";
               count1 = 0;
             }
-             else
+            else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
             break;
@@ -111,11 +111,11 @@ void learn()
               RFID_Data = "";
               count1 = 0;
             }
-             else
+            else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
             break;
@@ -129,11 +129,11 @@ void learn()
               count1 = 0;
               start_flag = 1;
             }
-             else
+            else
             {
-              if(start_flag == 1)
+              if (start_flag == 1)
               {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dsay start0x04");
               }
             }
             break;
@@ -143,7 +143,7 @@ void learn()
             break;
         }
       }
-     // Serial.println("done");
+      // Serial.println("done");
       flag = 0;
       count = 0;
       i = 0;

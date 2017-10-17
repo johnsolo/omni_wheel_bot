@@ -1,4 +1,4 @@
-void serial_flush()                                                                             
+void serial_flush()
 {
   while (Serial.available())
   {

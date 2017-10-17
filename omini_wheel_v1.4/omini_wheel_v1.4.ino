@@ -6,41 +6,52 @@
 
 //software serial pins
 #include<SoftwareSerial.h>
+#include <SPI.h>
+#include <MFRC522.h>
 SoftwareSerial ble_serial(10, 11);
-SoftwareSerial serial(12, 13);
+//SoftwareSerial serial(12, 13);
+
+
+
+#define RST_PIN         5         // Configurable, see typical pin layout above
+#define SS_PIN          53         // Configurable, see typical pin layout above
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 
 const int sensorPin0 = 2;     // the number of the pushbutton pin
 const int sensorPin1 = 3;
 const int sensorPin2 = 4;
-const int sensorPin3 = 49;
+const int sensorPin3 = 41;
 const int sensorPin4 = 6;
-const int sensorPin5 = 7;
-const int ledPin = 13;      // the number of the LED pin
-#define motorp  52
-#define motorn  49
-#define motorp1 12
-#define motorn1 13
-#define PWM1    9
-#define PWM2    8
+const int sensorPin5 = 7;      // the number of the LED pin
+#define motorp  39
+#define motorn  33
+#define motorp1 35
+#define motorn1 37
+#define PWM1    8
+#define PWM2    9
 #define Speed   250
 #define Speed1  150
 // variables will change:
 int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
 //input from bluetooth
-char ble_input[100], path[100], Rec_Data, start = 0, finish = 0;
+char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
-String input, mode_input, password, RFID_Data;
+String input, mode_input, password, RFID_Data, RFID_data1, RFID_data2;
 //making ble read charcter only for different modes we flag so that extra lines can be elimnated
 bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1;
 //connection establisment
 bool set_, auth_flag = 1;
 String packet;
+bool for_flag;
+void ble_read();
 void setup()
 {
   Serial.begin(9600);
-  Serial1.begin(9600);
   ble_serial.begin(9600);
-  Serial.begin(9600);
+  SPI.begin();                                                  // Init SPI bus
+  mfrc522.PCD_Init();                                              // Init MFRC522 card
+  //Serial.println(F("Read personal data on a MIFARE PICC:"));    //shows in serial that it is ready to read
   pinMode(motorp, OUTPUT);
   pinMode(motorn, OUTPUT);
   pinMode(motorp1, OUTPUT);

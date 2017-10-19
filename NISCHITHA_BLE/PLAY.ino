@@ -2,8 +2,7 @@ void play()
 {
   Serial.println("enter into the play");
   //delay(10);
- // ble_serial.println("0x01play0x1dstart listening0x04");
-  
+  ble_serial.println("0x01play0x1dstart listening0x04");
   memset (ble_input, '\0', sizeof(ble_input));
   serial_flush();
   //i=0;

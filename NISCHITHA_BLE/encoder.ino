@@ -6,7 +6,7 @@ void forward()
     sensorState1 = digitalRead(sensorPin1);
     sensorState2 = digitalRead(sensorPin2);
     sensorState3 = digitalRead(sensorPin3);
-    sensorState4 = digitalRead(sensorPin4);
+    sensorState4 = 0;//digitalRead(sensorPin4);
     sensorState5 = digitalRead(sensorPin5);
 
     Serial.print( sensorState0);
@@ -23,7 +23,6 @@ void forward()
 
     // check if the pushbutton is pressed. If it is, the sensorState is HIGH:
     if (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 1 && sensorState4 == 0 && sensorState5 == 0)
-    
     {
       analogWrite(PWM1, Speed);
       digitalWrite(motorp, HIGH);
@@ -135,7 +134,7 @@ void right()
             analogWrite(PWM1, 80);
             digitalWrite(motorp, LOW);
             digitalWrite(motorn, HIGH);
-         //   Serial.println(count);
+            Serial.println(count);
   
           }
           
@@ -278,7 +277,7 @@ void right1()
           digitalWrite(motorn, HIGH);
   
           for_flag = 0;  
-       //  forward();
+       //   forward();
        //   flag = 0;  
   //  data='\0';
 }

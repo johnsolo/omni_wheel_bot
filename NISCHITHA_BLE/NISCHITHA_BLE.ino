@@ -10,6 +10,9 @@
 #include <MFRC522.h>
 SoftwareSerial ble_serial(10, 11);
 //SoftwareSerial serial(12, 13);
+
+
+
 #define RST_PIN         5         // Configurable, see typical pin layout above
 #define SS_PIN          53         // Configurable, see typical pin layout above
 
@@ -19,18 +22,16 @@ const int sensorPin0 = 2;     // the number of the pushbutton pin
 const int sensorPin1 = 3;
 const int sensorPin2 = 4;
 const int sensorPin3 = 41;
-const int sensorPin4 = 8;
+const int sensorPin4 = 6;
 const int sensorPin5 = 7;      // the number of the LED pin
 #define motorp  39
 #define motorn  33
 #define motorp1 35
 #define motorn1 37
-#define PWM1    12
-#define PWM2    13
+#define PWM1    8
+#define PWM2    9
 #define Speed   250
 #define Speed1  150
-#define led     31
-#define led1    29
 // variables will change:
 int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
 //input from bluetooth
@@ -57,9 +58,6 @@ void setup()
   pinMode(motorn1, OUTPUT);
   pinMode(PWM1, OUTPUT);
   pinMode(PWM2, OUTPUT);
-  pinMode(led,OUTPUT);
-  pinMode(led1,OUTPUT);
-  
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   pinMode(sensorPin0, OUTPUT);
   digitalWrite(sensorPin0, HIGH);

@@ -5,15 +5,13 @@ void ble_read()
     //while(count<4)
     while (ble_serial.available())
 
-    { digitalWrite(led,HIGH);
-    digitalWrite(led1,LOW);
+    {
       //Serial.println("available");
       ble_input[i]  = (char)ble_serial.read();
       //  Serial.println(ble_input[i]);
       i++;
       delay(7);
     }
-  
     if (ble_char == 0)
     {
       i = 0;
@@ -67,12 +65,9 @@ void ble_read()
 
       }
 
-
     }
     //flag = 1;
   }
-        digitalWrite(led,LOW);
-   digitalWrite(led1,HIGH);
 }
 
 

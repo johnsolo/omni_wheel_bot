@@ -4,7 +4,7 @@ void mode_switch()
   {
     if (mode_input == "do")
     {
-      // Serial.print(mode_input)
+      // Serial.print(mode_input);
       do_flag = 1;
       Serial.println("do");
       flag = 0;

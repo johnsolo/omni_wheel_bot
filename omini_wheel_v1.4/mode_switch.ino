@@ -1,3 +1,4 @@
+//////////////////////////////////////////////////////////MODE SELECTION/////////////////////////////////////////////////////////////////////////////////////////
 void mode_switch()
 {
   if (flag == 1)
@@ -31,6 +32,11 @@ void mode_switch()
       Serial.println("play");
       mode_input = "";
       play();
+    }
+    else
+    {
+     //Serial.println("invalid");
+      mode_input = "";
     }
   }
   flag = 0;

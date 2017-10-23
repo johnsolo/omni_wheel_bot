@@ -21,6 +21,8 @@ const int sensorPin2 = 4;
 const int sensorPin3 = 41;
 const int sensorPin4 = 8;
 const int sensorPin5 = 7;      // the number of the LED pin
+
+int connect_state;
 #define motorp  39
 #define motorn  33
 #define motorp1 35
@@ -29,6 +31,8 @@ const int sensorPin5 = 7;      // the number of the LED pin
 #define PWM2    13
 #define Speed   250
 #define Speed1  150
+#define state   9
+//LED'S for listening 
 #define led     31
 #define led1    29
 // variables will change:
@@ -44,23 +48,31 @@ bool set_, auth_flag = 1;
 String packet;
 bool for_flag;
 void ble_read();
+char ack;
 void setup()
 {
   Serial.begin(9600);
   ble_serial.begin(9600);
+  ////////////////////////////////////////////////////RF-CARD READING PART////////////////////////////////////////////////////////
   SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init();                                              // Init MFRC522 card
   //Serial.println(F("Read personal data on a MIFARE PICC:"));    //shows in serial that it is ready to read
+  ///////////////////////////////////////////////////MOTOR PART//////////////////////////////////////////////////////////////////////
   pinMode(motorp, OUTPUT);
   pinMode(motorn, OUTPUT);
   pinMode(motorp1, OUTPUT);
   pinMode(motorn1, OUTPUT);
+  pinMode(state,INPUT);
   pinMode(PWM1, OUTPUT);
   pinMode(PWM2, OUTPUT);
   pinMode(led,OUTPUT);
   pinMode(led1,OUTPUT);
-  
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////SENSOR INPUTS////////////////////////////////////////////////////////////
+  /*
+   1. We have to make make sensor pins as output and make it HIGH for 10 millis second 
+   2. Then make sensor pins as input_pull up to read again
+  */
+   
   pinMode(sensorPin0, OUTPUT);
   digitalWrite(sensorPin0, HIGH);
   delayMicroseconds(10);
@@ -88,8 +100,8 @@ void setup()
 }
 
 void loop()
-{
-  if (auth_flag == 1)
+{///////////////////////////////////////////////////////////////////////AUTH FOR FUTURE/////////////////////////////////////////////////////////////////////
+  if (auth_flag == 1)//auth flag
   {
     ble_read();
     mode_switch();

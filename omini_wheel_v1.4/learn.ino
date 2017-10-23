@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////LEARN MODE/////////////////////////////////////////////////////////////////////////////////////////
 void learn()
 { Serial.println("enter into the learn");
   memset (ble_input, '\0', sizeof(ble_input));
@@ -5,6 +6,7 @@ void learn()
   serial_flush();
   while (learn_flag != 0)
   {
+    state_();
     ble_char = 1;
     ble_read();
     if (flag == 1)
@@ -30,8 +32,7 @@ void learn()
               forward();
               for_flag = 0;
               forward_flag = 0;
-              ble_serial.println("0x01learn0x1dforward successful0x04");
-
+              ble_serial.println("0x01learn0x1dF0x04");
               RFID_Data = "\0";
               count1 = 0;
             }
@@ -39,11 +40,11 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dwrong path0x04");
+                ble_serial.println("0x01learn0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
 
@@ -64,7 +65,7 @@ void learn()
             {
               if (start_flag == 1)
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -76,7 +77,7 @@ void learn()
             {
               Serial.println("Left");
               left1();
-              ble_serial.println("0x01learn0x1dleft successful0x04");
+              ble_serial.println("0x01learn0x1dL0x04");
               RFID_Data = "\0";
               forward_flag = 1;
               count1 = 0;
@@ -85,11 +86,11 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dwrong path0x04");
+                ble_serial.println("0x01learn0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -101,7 +102,7 @@ void learn()
             {
               Serial.println("right");
               right1();
-              ble_serial.println("0x01learn0x1dright successful0x04");
+              ble_serial.println("0x01learn0x1dR0x04");
               RFID_Data = "\0";
               forward_flag = 1;
               count1 = 0;
@@ -110,11 +111,11 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dwrong path0x04");
+                ble_serial.println("0x01learn0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -126,7 +127,7 @@ void learn()
             if (start_flag == 1)
             {
               Serial.println("Exit");
-              ble_serial.println("0x01learn0x1dexit successful0x04");
+              ble_serial.println("0x01learn0x1dE0x04");
               learn_flag = 0;
               RFID_Data = "";
               count1 = 0;
@@ -134,7 +135,7 @@ void learn()
             else
             {
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -147,7 +148,7 @@ void learn()
               Serial.println("stop");
               stop_();
               stop_flag = 1;
-              ble_serial.println("0x01learn0x1dstop successful0x04");
+              ble_serial.println("0x01learn0x1dS0x04");
               // learn_flag = 0;
               RFID_Data = "";
               count1 = 0;
@@ -156,11 +157,11 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dwrong pathx04");
+                ble_serial.println("0x01learn0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dsay start0x04");
+                ble_serial.println("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -171,7 +172,7 @@ void learn()
               Serial.println("start");
               forward();
               for_flag = 0;
-              ble_serial.println("0x01learn0x1dstart successful0x04");
+              ble_serial.println("0x01learn0x1dF0x04");
               RFID_Data = "\0";
               count1 = 0;
               start_flag = 1;
@@ -179,11 +180,11 @@ void learn()
             }
             else if (start_flag == 1 && stop_flag == 0)
             {
-              ble_serial.println("0x01learn0x1dwrong pathx04");
+              ble_serial.println("0x01learn0x1dW0x04");
             }
             else if (start_flag == 0)
             {
-              ble_serial.println("0x01learn0x1dsay start0x04");
+              ble_serial.println("0x01learn0x1dI0x04");
             }
 
             break;

@@ -1,3 +1,4 @@
+////////////////////////////////////////////////////////////DO MODE/////////////////////////////////////////////////////////////////////////////////
 void do_mode()
 {
   Serial.println("enter into the do");
@@ -6,6 +7,7 @@ void do_mode()
   serial_flush();
    while (do_flag != 0)
   {
+    state_();
     ble_char = 1;
     ble_read();
     if (flag == 1)

@@ -24,7 +24,7 @@ const int sensorPin5 = 7;      // the number of the LED pin
 
 int connect_state;
 #define motorp  39
-#define motorn  33
+#define motorn  27
 #define motorp1 35
 #define motorn1 37
 #define PWM1    12

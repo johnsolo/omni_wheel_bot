@@ -32,7 +32,7 @@ int connect_state;
 #define Speed   250
 #define Speed1  150
 #define state   9
-//LED'S for listening 
+//LED'S for listening
 #define led     31
 #define led1    29
 // variables will change:
@@ -62,17 +62,17 @@ void setup()
   pinMode(motorn, OUTPUT);
   pinMode(motorp1, OUTPUT);
   pinMode(motorn1, OUTPUT);
-  pinMode(state,INPUT);
+  pinMode(state, INPUT);
   pinMode(PWM1, OUTPUT);
   pinMode(PWM2, OUTPUT);
-  pinMode(led,OUTPUT);
-  pinMode(led1,OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(led1, OUTPUT);
   //////////////////////////////////////////////////////////SENSOR INPUTS////////////////////////////////////////////////////////////
   /*
-   1. We have to make make sensor pins as output and make it HIGH for 10 millis second 
-   2. Then make sensor pins as input_pull up to read again
+    1. We have to make make sensor pins as output and make it HIGH for 10 millis second
+    2. Then make sensor pins as input_pull up to read again
   */
-   
+
   pinMode(sensorPin0, OUTPUT);
   digitalWrite(sensorPin0, HIGH);
   delayMicroseconds(10);
@@ -100,7 +100,7 @@ void setup()
 }
 
 void loop()
-{///////////////////////////////////////////////////////////////////////AUTH FOR FUTURE/////////////////////////////////////////////////////////////////////
+{ ///////////////////////////////////////////////////////////////////////AUTH FOR FUTURE/////////////////////////////////////////////////////////////////////
   if (auth_flag == 1)//auth flag
   {
     ble_read();

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////READING DATA FROM BLE///////////////////////////////////////////////////////////////////////////
 /*
-   FORMAT FOR SENDING AND RECEIVING :: 0x01 MODE 0x1d INSTRUCTION 0x04// NO SPACES INBETWEEN
+   FORMAT FOR SENDING AND RECEIVING :: 0x01 MODE 0x1d INSTRUCTION 0x04// NO SPACES IN-BETWEEN
    0X01 :: START OF TEXT
    0x1d :: GROUP SEPERATOR
    0X04 :: END OF TEXT
@@ -21,7 +21,7 @@ void ble_read()
       digitalWrite(led1, HIGH);
       //Serial.println("available");
       ble_input[i]  = (char)ble_serial.read();
-     // Serial.println(ble_input[i]);
+      // Serial.println(ble_input[i]);
       i++;
       delay(7);
     }

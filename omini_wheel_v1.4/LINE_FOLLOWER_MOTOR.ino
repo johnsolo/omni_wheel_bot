@@ -23,7 +23,7 @@ void forward()
 
     // check if the pushbutton is pressed. If it is, the sensorState is HIGH:
     if (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 1 && sensorState4 == 0 && sensorState5 == 0)
-    
+
     {
       analogWrite(PWM1, Speed);
       digitalWrite(motorp, HIGH);
@@ -35,11 +35,11 @@ void forward()
 
     }
     else if ((sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 0 && sensorState5 == 0) ||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1  && sensorState5 == 0)||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1  && sensorState5 == 1)||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 1)||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1 && sensorState5 == 0)||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1 && sensorState5 == 1)||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1  && sensorState5 == 0) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1  && sensorState5 == 1) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 1) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1 && sensorState5 == 0) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1 && sensorState5 == 1) ||
              (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 0 && sensorState5 == 1))
     { analogWrite(PWM2, Speed1);
 
@@ -51,11 +51,11 @@ void forward()
 
     }
     else if ((sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
-             (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0)||
-             (sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0)||
-             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 0)||
-             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0)||
-             (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0)||
+             (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
+             (sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
+             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 0) ||
+             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
+             (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0))
     {
       analogWrite(PWM1, Speed1);
@@ -132,47 +132,47 @@ void right()
 
 { sensorState5 = digitalRead(sensorPin5);
   //sensorState4 = digitalRead(sensorPin4);
-          while (sensorState5!=1)
-          {
-            sensorState5 = digitalRead(sensorPin5);
-            analogWrite(PWM2, 80);
-            digitalWrite(motorp1, HIGH);
-            digitalWrite(motorn1, LOW);
-            analogWrite(PWM1, 80);
-            digitalWrite(motorp, LOW);
-            digitalWrite(motorn, HIGH);
-         //   Serial.println(count);
-  
-          }
-          
-          
-          
-          sensorState2 = digitalRead(sensorPin2);
-          sensorState3 = digitalRead(sensorPin3);
-          while (sensorState2 != 1 && sensorState3 != 1)
-          {
-            sensorState2 = digitalRead(sensorPin2);
-            sensorState3 = digitalRead(sensorPin3);
-  
-            analogWrite(PWM2, 80);
-  
-            digitalWrite(motorp1, HIGH);
-            digitalWrite(motorn1, LOW);
-            analogWrite(PWM1, 80);
-            digitalWrite(motorp, LOW);
-            digitalWrite(motorn, HIGH);
-  
-          }
-          analogWrite(PWM2, 80);
-          digitalWrite(motorp1, HIGH);
-          digitalWrite(motorn1, HIGH);
-          analogWrite(PWM1, 80);
-          digitalWrite(motorp, HIGH);
-          digitalWrite(motorn, HIGH);
-  
-          flag = 0;  
-          forward();
-          flag = 0;  
+  while (sensorState5 != 1)
+  {
+    sensorState5 = digitalRead(sensorPin5);
+    analogWrite(PWM2, 80);
+    digitalWrite(motorp1, HIGH);
+    digitalWrite(motorn1, LOW);
+    analogWrite(PWM1, 80);
+    digitalWrite(motorp, LOW);
+    digitalWrite(motorn, HIGH);
+    //   Serial.println(count);
+
+  }
+
+
+
+  sensorState2 = digitalRead(sensorPin2);
+  sensorState3 = digitalRead(sensorPin3);
+  while (sensorState2 != 1 && sensorState3 != 1)
+  {
+    sensorState2 = digitalRead(sensorPin2);
+    sensorState3 = digitalRead(sensorPin3);
+
+    analogWrite(PWM2, 80);
+
+    digitalWrite(motorp1, HIGH);
+    digitalWrite(motorn1, LOW);
+    analogWrite(PWM1, 80);
+    digitalWrite(motorp, LOW);
+    digitalWrite(motorn, HIGH);
+
+  }
+  analogWrite(PWM2, 80);
+  digitalWrite(motorp1, HIGH);
+  digitalWrite(motorn1, HIGH);
+  analogWrite(PWM1, 80);
+  digitalWrite(motorp, HIGH);
+  digitalWrite(motorn, HIGH);
+
+  flag = 0;
+  forward();
+  flag = 0;
   //  data='\0';
 }
 void stop_()
@@ -216,7 +216,7 @@ void left1()
     digitalWrite(motorn, LOW);
 
   }
-    analogWrite(PWM2, 80);
+  analogWrite(PWM2, 80);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, LOW);
   analogWrite(PWM1, 80);
@@ -231,7 +231,7 @@ void left1()
   Serial.println("out");
   for_flag = 0;
   //forward();
-//  for_flag = 0;
+  //  for_flag = 0;
   //data='\0';
 }
 
@@ -239,58 +239,58 @@ void right1()
 
 { sensorState5 = digitalRead(sensorPin5);
   //sensorState4 = digitalRead(sensorPin4);
-          while (sensorState5!=1)
-          {
-            sensorState5 = digitalRead(sensorPin5);
-            analogWrite(PWM2, 80);
-            digitalWrite(motorp1, HIGH);
-            digitalWrite(motorn1, LOW);
-            analogWrite(PWM1, 80);
-            digitalWrite(motorp, LOW);
-            digitalWrite(motorn, HIGH);
-            Serial.println(count);
-  
-          }
-          
-          
-          
-          sensorState2 = digitalRead(sensorPin2);
-          sensorState3 = digitalRead(sensorPin3);
-          while (sensorState2 != 1 && sensorState3 != 1)
-          {
-            sensorState2 = digitalRead(sensorPin2);
-            sensorState3 = digitalRead(sensorPin3);
-  
-            analogWrite(PWM2, 80);
-  
-            digitalWrite(motorp1, HIGH);
-            digitalWrite(motorn1, LOW);
-            analogWrite(PWM1, 80);
-            digitalWrite(motorp, LOW);
-            digitalWrite(motorn, HIGH);
-  
-          }
-              analogWrite(PWM2, 80);
+  while (sensorState5 != 1)
+  {
+    sensorState5 = digitalRead(sensorPin5);
+    analogWrite(PWM2, 80);
+    digitalWrite(motorp1, HIGH);
+    digitalWrite(motorn1, LOW);
+    analogWrite(PWM1, 80);
+    digitalWrite(motorp, LOW);
+    digitalWrite(motorn, HIGH);
+    Serial.println(count);
+
+  }
+
+
+
+  sensorState2 = digitalRead(sensorPin2);
+  sensorState3 = digitalRead(sensorPin3);
+  while (sensorState2 != 1 && sensorState3 != 1)
+  {
+    sensorState2 = digitalRead(sensorPin2);
+    sensorState3 = digitalRead(sensorPin3);
+
+    analogWrite(PWM2, 80);
+
+    digitalWrite(motorp1, HIGH);
+    digitalWrite(motorn1, LOW);
+    analogWrite(PWM1, 80);
+    digitalWrite(motorp, LOW);
+    digitalWrite(motorn, HIGH);
+
+  }
+  analogWrite(PWM2, 80);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, LOW);
   analogWrite(PWM1, 80);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, LOW);
-          analogWrite(PWM2, 80);
-          digitalWrite(motorp1, HIGH);
-          digitalWrite(motorn1, HIGH);
-          analogWrite(PWM1, 80);
-          digitalWrite(motorp, HIGH);
-          digitalWrite(motorn, HIGH);
-  
-          for_flag = 0;  
-       //  forward();
-       //   flag = 0;  
+  analogWrite(PWM2, 80);
+  digitalWrite(motorp1, HIGH);
+  digitalWrite(motorn1, HIGH);
+  analogWrite(PWM1, 80);
+  digitalWrite(motorp, HIGH);
+  digitalWrite(motorn, HIGH);
+
+  for_flag = 0;
+  //  forward();
+  //   flag = 0;
   //  data='\0';
 }
 void back()
 {
-                                   
+
 }
 
 

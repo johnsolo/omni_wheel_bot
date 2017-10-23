@@ -11,7 +11,7 @@ void play()
   while (play_flag != 0 )
   {
     state_();
-    ble_char = 1;   
+    ble_char = 1;
     ble_read();
     direction_();
   }

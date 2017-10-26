@@ -38,9 +38,9 @@ void forward()
              (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1  && sensorState5 == 0) ||
              (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1  && sensorState5 == 1) ||
              (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 1) ||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1 && sensorState5 == 0) ||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1 && sensorState5 == 1) ||
-             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 0 && sensorState5 == 1))
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 1  && sensorState5 == 0) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 1  && sensorState5 == 1) ||
+             (sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 0  && sensorState5 == 1))
     { analogWrite(PWM2, Speed1);
 
       digitalWrite(motorp1, LOW);
@@ -53,7 +53,7 @@ void forward()
     else if ((sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
-             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0  && sensorState5 == 0) ||
+             (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 1 && sensorState1 == 0 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 0 && sensorState1 == 1 && sensorState2 == 0 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0) ||
              (sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 0 && sensorState4 == 0 && sensorState5 == 0))
@@ -123,7 +123,14 @@ void left()
   digitalWrite(motorn, HIGH);
   Serial.println("out");
   for_flag = 0;
+        ble_serial.println("0x01teach0x1dF0x04");
+      //delay(2000);
+            readAck();
+      if(ack=='1')
+      {
   forward();
+      }
+      ack='\0';
   for_flag = 0;
   //data='\0';
 }
@@ -171,7 +178,13 @@ void right()
   digitalWrite(motorn, HIGH);
 
   flag = 0;
+  ble_serial.print("0x01teach0x1dF0x04");
+  readAck();
+  if(ack=='1')
+  {
   forward();
+  }
+  ack='\0';
   flag = 0;
   //  data='\0';
 }

@@ -1,8 +1,8 @@
-////////////////////////////////////////////////////////////DO-MODE/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////DO-MODE/////////////////////////////////////////////////////////////////////////////////////////////////////
 void do_mode()
 {
   Serial.println("enter into the do");
-  memset (ble_input, '\0', sizeof(ble_input));
+  memset (ble_input, '\0', sizeof(ble_input));//SET THE ENTIRE ARRAY TO NULL
   int start_flag, stop_flag = 1, forward_flag;
   serial_flush();
   while (do_flag != 0)
@@ -18,12 +18,6 @@ void do_mode()
         {
             Serial.print(path[i]);
           case 'f':
-            //     rfid_read();
-            //     if (input == input)
-
-            // Serial.println("forward");
-
-            //     encoder(motorp, motorn, 1, 0);
             rf_read();
             if (RFID_Data == "FORWARD" && start_flag == 1 && stop_flag == 0 || forward_flag == 1)
             {
@@ -42,18 +36,16 @@ void do_mode()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01do0x1dwrong path0x04");
+                ble_serial.println("0x01do0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
-
             break;
           case 'b':
             Serial.println("back");
-            //  encoder(motorp, motorn, 0, 1);
             rf_read();
             if (RFID_Data == "1700453BD6" && start_flag == 1)
             {
@@ -67,7 +59,7 @@ void do_mode()
             {
               if (start_flag == 1)
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
             break;
@@ -88,11 +80,11 @@ void do_mode()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01do0x1dwrong path0x04");
+                ble_serial.println("0x01do0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
             break;
@@ -113,11 +105,11 @@ void do_mode()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01do0x1dwrong path0x04");
+                ble_serial.println("0x01do0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
             break;
@@ -137,7 +129,7 @@ void do_mode()
             else
             {
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
             break;
@@ -159,11 +151,11 @@ void do_mode()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01do0x1dwrong pathx04");
+                ble_serial.println("0x01do0x1dWx04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01do0x1dsay start0x04");
+                ble_serial.println("0x01do0x1dI0x04");
               }
             }
             break;
@@ -172,6 +164,7 @@ void do_mode()
             if (RFID_Data == "START" && stop_flag == 1)
             {
               Serial.println("start");
+              for_flag = 0;
               forward();
               for_flag = 0;
               ble_serial.println("0x01do0x1dstart successful0x04");
@@ -182,11 +175,11 @@ void do_mode()
             }
             else if (start_flag == 1 && stop_flag == 0)
             {
-              ble_serial.println("0x01do0x1dwrong pathx04");
+              ble_serial.println("0x01do0x1dW0x04");
             }
             else if (start_flag == 0)
             {
-              ble_serial.println("0x01do0x1dsay start0x04");
+              ble_serial.println("0x01do0x1dI0x04");
             }
 
             break;
@@ -201,15 +194,11 @@ void do_mode()
       count = 0;
       i = 0;
       ble_input[i] = '\0';
-
     }
-
   }
   do_flag = 1;
   Serial.println(flag);
   serial_flush();
   ble_char = 0;
-
-
 }
 

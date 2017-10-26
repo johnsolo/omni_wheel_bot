@@ -35,7 +35,7 @@ void mode_switch()
     }
     else
     {
-     //Serial.println("invalid");
+      //Serial.println("invalid");
       mode_input = "";
     }
   }
@@ -44,6 +44,7 @@ void mode_switch()
   i = 0;
   ble_input[i] = '\0';
   mode_input = "";
+  
 }
 
 

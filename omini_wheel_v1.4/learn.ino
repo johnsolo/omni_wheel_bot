@@ -29,10 +29,17 @@ void learn()
               Serial.println("forward");
               // encoder(motorp, motorn, 1, 0, 8,2);
               for_flag = 0;
-              forward();
+             forward();
               for_flag = 0;
               forward_flag = 0;
-              ble_serial.println("0x01learn0x1dF0x04");
+             
+           
+              ble_serial.print("0x01learn0x1dFS0x04");
+               readAck();
+                 if(ack==1)
+              {
+              }
+               ack='\0';
               RFID_Data = "\0";
               count1 = 0;
             }
@@ -76,8 +83,16 @@ void learn()
             if (RFID_Data == "LEFT" && start_flag == 1 && stop_flag == 0)
             {
               Serial.println("Left");
-              left1();
-              ble_serial.println("0x01learn0x1dL0x04");
+             left1();
+                 
+           
+              ble_serial.print("0x01learn0x1dLS0x04");
+               readAck();
+                 if(ack==1)
+              {
+              
+              }
+               ack='\0';
               RFID_Data = "\0";
               forward_flag = 1;
               count1 = 0;
@@ -101,8 +116,15 @@ void learn()
             if (RFID_Data == "RIGHT" && start_flag == 1 && stop_flag == 0)
             {
               Serial.println("right");
-              right1();
-              ble_serial.println("0x01learn0x1dR0x04");
+             right1();
+                  
+         
+              ble_serial.print("0x01learn0x1dRS0x04");
+              readAck();
+                  if(ack==1)
+              {
+                }
+               ack='\0';
               RFID_Data = "\0";
               forward_flag = 1;
               count1 = 0;
@@ -127,7 +149,14 @@ void learn()
             if (start_flag == 1)
             {
               Serial.println("Exit");
-              ble_serial.println("0x01learn0x1dE0x04");
+                 
+        
+              ble_serial.print("0x01learn0x1dES0x04");
+               readAck();
+                while (ack!=1)
+              {
+              }
+               ack='\0';
               learn_flag = 0;
               RFID_Data = "";
               count1 = 0;
@@ -148,7 +177,7 @@ void learn()
               Serial.println("stop");
               stop_();
               stop_flag = 1;
-              ble_serial.println("0x01learn0x1dS0x04");
+              ble_serial.println("0x01learn0x1dSS0x04");
               // learn_flag = 0;
               RFID_Data = "";
               count1 = 0;
@@ -157,11 +186,11 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dW0x04");
+                ble_serial.print("0x01learn0x1dW0x04");
               }
               else if (start_flag == 0)
               {
-                ble_serial.println("0x01learn0x1dI0x04");
+                ble_serial.print("0x01learn0x1dI0x04");
               }
             }
             break;
@@ -170,9 +199,16 @@ void learn()
             if (RFID_Data == "START" && stop_flag == 1)
             {
               Serial.println("start");
-              forward();
+             forward();
               for_flag = 0;
-              ble_serial.println("0x01learn0x1dF0x04");
+                 
+          
+              ble_serial.print("0x01learn0x1dKS0x04");
+               readAck();
+                  if(ack==1)
+              {
+              }
+              ack='\0';
               RFID_Data = "\0";
               count1 = 0;
               start_flag = 1;
@@ -206,6 +242,7 @@ void learn()
   Serial.println(flag);
   serial_flush();
   ble_char = 0;
+  
 
 
 }

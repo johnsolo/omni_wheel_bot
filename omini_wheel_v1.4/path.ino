@@ -1,7 +1,7 @@
-/////////////////////////////////////////////////////////////////////FOR PLAYMODE ONLY/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////FOR PLAY MODE ONLY/////////////////////////////////////////////////////////////////////////////
 void direction_()
 { //Serial.println("direction");
-  if (flag == 1)
+  if (flag == 1)                              //flag set to enable for ble read
   {
     for (i = 0; i < count; i++)
     { //Serial.println(count);
@@ -9,13 +9,8 @@ void direction_()
       // Serial.print(path[2]);
       switch (path[i])
       {
-
         case 'f':
         case 'k':
-          //     rfid_read();
-          //     if (input == input)
-           //     rfid_read();
-          //     if (input == input)
           {
             Serial.println("CONT:forward");
             ble_serial.println("0x01play0x1dF0x04");

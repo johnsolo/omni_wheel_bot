@@ -1,5 +1,6 @@
 void rf_read()
-{ // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
+{ 
+  // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
   for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
 
@@ -108,7 +109,7 @@ void rf_read()
   Serial.print("my idea= ");
   RFID_Data.trim();
   //Serial.println(RFID_Data.length());
-  delay(500); //change value if you want to read cards faster
+  delay(100); //change value if you want to read cards faster
 
   //RFID_Data="";
   mfrc522.PICC_HaltA();

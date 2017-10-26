@@ -3,7 +3,6 @@
    Date     : 1/09/2017
    Project  : Omni Wheel bot
 */
-
 //software serial pins
 #include<SoftwareSerial.h>
 #include <SPI.h>
@@ -98,11 +97,11 @@ void setup()
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
 }
-
 void loop()
 { ///////////////////////////////////////////////////////////////////////AUTH FOR FUTURE/////////////////////////////////////////////////////////////////////
   if (auth_flag == 1)//auth flag
   {
+   // flag=0;
     ble_read();
     mode_switch();
   }

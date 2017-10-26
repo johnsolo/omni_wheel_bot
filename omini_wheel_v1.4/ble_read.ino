@@ -19,7 +19,7 @@ void ble_read()
       digitalWrite(led, LOW);
 
       digitalWrite(led1, HIGH);
-      //Serial.println("available");
+      Serial.println("available");
       ble_input[i]  = (char)ble_serial.read();
       // Serial.println(ble_input[i]);
       i++;

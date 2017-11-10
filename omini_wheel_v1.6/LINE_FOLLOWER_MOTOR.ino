@@ -116,11 +116,11 @@ void left()
     sensorState2 = digitalRead(sensorPin2);
     sensorState3 = digitalRead(sensorPin3);
 
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
 
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
 
@@ -158,10 +158,10 @@ void right()
   while (sensorState5 != 1)
   {
     sensorState5 = digitalRead(sensorPin5);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
     //   Serial.println(count);
@@ -177,11 +177,11 @@ void right()
     sensorState2 = digitalRead(sensorPin2);
     sensorState3 = digitalRead(sensorPin3);
 
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
 
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
 
@@ -226,10 +226,10 @@ void left1()
   while (sensorState0 != 1 )
   {
     sensorState0 = digitalRead(sensorPin0);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
     Serial.println(count);
@@ -242,11 +242,11 @@ void left1()
     sensorState2 = digitalRead(sensorPin2);
     sensorState3 = digitalRead(sensorPin3);
 
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
 
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
 
@@ -277,10 +277,10 @@ void right1()
   while (sensorState5 != 1)
   {
     sensorState5 = digitalRead(sensorPin5);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 60);
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 60);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
     Serial.println(count);

@@ -1,6 +1,7 @@
-///////////////////////////////////////////////////////////////////TEACH MODE/////////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////////TEACH MODE/////////////////////////////////////////////////////////////////////////////// 
 void teach()
-{ int start_flag = 0,stop_flag=1;
+{ 
+  int start_flag = 0,stop_flag=1;
   memset (ble_input, '\0', sizeof(ble_input));
   serial_flush();
   while (teach_flag != 0)
@@ -15,11 +16,9 @@ void teach()
     {
       case 'e' : Serial.println("exit........");
                  //ble_serial.println("0x01teach0x1dE0x04");
-                  teach_flag=0;
-                
-                  
+                  teach_flag=0;             
                   break;
-      default: break;
+      default:    break;
     }
     //Serial.println(path[0]);
     // Serial.print( "RFID_Data:::");
@@ -76,7 +75,7 @@ void teach()
     {
       Serial.println("stop");
       //ble_serial.println("0x01teach0x1dstop successful0x04");
-      ble_serial.println("0x01teach0x1dS0x04");
+      ble_serial.println("0x01teach0x1dD0x04");
       //encoder(motorp, motorn, 0, 1, 8);
       //delay(2000);
             readAck();
@@ -116,13 +115,10 @@ void teach()
       count1 = 0;
       RFID_Data = "";
     }
-
   }
   teach_flag = 1;
   RFID_Data = "";
   Serial.println("out of teach");
   ble_char=0;
- 
- 
 }
 

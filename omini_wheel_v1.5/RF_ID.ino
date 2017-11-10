@@ -98,18 +98,20 @@ void rf_read()
     Serial.println("in2");
     RFID_Data = RFID_data2;
     RFID_data2 = "";
+    Serial.println(RFID_Data);
   }
   else if (RFID_data1.length() != 0)
   {
     Serial.println("in1");
     RFID_Data = RFID_data1;
     RFID_data1 = "";
+    Serial.println(RFID_Data);
 
   }
   Serial.print("my idea= ");
   RFID_Data.trim();
   //Serial.println(RFID_Data.length());
-  delay(500); //change value if you want to read cards faster
+  delay(200); //change value if you want to read cards faster
 
   //RFID_Data="";
   mfrc522.PICC_HaltA();

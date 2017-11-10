@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////TEACH MODE/////////////////////////////////////////////////////////////////////////////// 
 void teach()
-{ int start_flag = 0,stop_flag=1;
+{ 
+  int start_flag = 0,stop_flag=1;reverse_flag=0;
   memset (ble_input, '\0', sizeof(ble_input));
   serial_flush();
   while (teach_flag != 0)
@@ -83,11 +84,17 @@ void teach()
       if(ack=='1')
       {
       stop_();
+      left1();
+      left();
+            RFID_Data = "\0";
+      reverse_();
+    //  reverse_();
       stop_flag=1;
       }
        ble_serial.println("0x01teach0x1da0x04");
-      RFID_Data = "\0";
+
       count1 = 0;
+      
     }
     else if (RFID_Data == "RIGHT" && start_flag == 1 )
     {

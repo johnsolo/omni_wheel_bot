@@ -152,12 +152,13 @@ void learn()
                  
         
               ble_serial.print("0x01learn0x1dES0x04");
-               readAck();
-                while (ack!=1)
-              {
-              }
+     //          readAck();
+////                while (ack!=1)
+//              {
+//                learn_flag = 0;
+//              }
                ack='\0';
-              learn_flag = 0;
+                     
               RFID_Data = "";
               count1 = 0;
             }
@@ -238,12 +239,9 @@ void learn()
 
     }
   }
-  learn_flag = 1;
-  Serial.println(flag);
-  serial_flush();
-  ble_char = 0;
+  flag=0;  Serial.println(flag);
   
-
-
+  serial_flush();
+  ble_char = 0; 
 }
 

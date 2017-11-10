@@ -27,6 +27,7 @@ void do_mode()
               // encoder(motorp, motorn, 1, 0, 8,2);
               for_flag = 0;
               forward();
+              delay(1000);
               for_flag = 0;
               forward_flag = 0;
               //ble_serial.println("0x01do0x1dforward successful0x04");
@@ -73,6 +74,7 @@ void do_mode()
             {
               Serial.println("Left");
               left1();
+              delay(1000);
              // ble_serial.println("0x01do0x1dleft successful0x04");
               RFID_Data = "\0";
               forward_flag = 1;
@@ -94,11 +96,12 @@ void do_mode()
             Serial.println("right");
             //  encoder(motorp1, motorn1, 0, 1);
             rf_read();
+            
             if (RFID_Data == "RIGHT" && start_flag == 1 && stop_flag == 0)
             {
               Serial.println("right");
               right1();
-              //ble_serial.println("0x01do0x1dright successful0x04");
+             delay(1000); //ble_serial.println("0x01do0x1dright successful0x04");
               RFID_Data = "\0";
               forward_flag = 1;
               count1 = 0;
@@ -168,8 +171,9 @@ void do_mode()
               Serial.println("start");
               for_flag = 0;
               forward();
+              delay(1000);
               for_flag = 0;
-              //ble_serial.println("0x01do0x1dKS0x04");
+              ble_serial.println("0x01do0x1dS0x04");
               RFID_Data = "\0";
               count1 = 0;
               start_flag = 1;

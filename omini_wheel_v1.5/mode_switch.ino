@@ -40,6 +40,13 @@ void mode_switch()
       mode_input = "";
       teach1();
     }
+      else if (mode_input == "learndo")
+    {
+      learn_do_flag = 1;
+      Serial.println("play");
+      mode_input = "";
+      learndo_mode();
+    }
     else
     {
       //Serial.println("invalid");

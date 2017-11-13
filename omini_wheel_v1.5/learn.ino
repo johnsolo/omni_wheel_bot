@@ -259,6 +259,10 @@ void learn()
             }
 
             break;
+            case 'w':                 wrong_left();
+                wrong_right();
+                wrong_left();
+                break;
           default:
             Serial.println("invalid");
             Serial.println(path[i]);

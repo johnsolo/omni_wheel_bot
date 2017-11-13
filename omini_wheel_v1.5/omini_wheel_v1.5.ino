@@ -43,7 +43,7 @@ char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
 String input, mode_input, password, RFID_Data, RFID_data1, RFID_data2;
 //making ble read charcter only for different modes we flag so that extra lines can be elimnated
-bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1;
+bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1,learn_do_flag =1;
 //connection establisment
 bool set_, auth_flag = 1;
 String packet;
@@ -102,7 +102,7 @@ void setup()
   pinMode(sensorPin5, INPUT_PULLUP);
 } 
 void loop()
-{ ///////////////////////////////////////////////////////////////////////AUTH FOR FUTURE/////////////////////////////////////////////////////////////////////
+{ ////////////////////////////////////////////////////////////////////////////AUTH FOR FUTURE//////////////////////////////////////////////////////////////////////////////////////////////
   if (auth_flag == 1)//auth flag
   {
    // flag=0;

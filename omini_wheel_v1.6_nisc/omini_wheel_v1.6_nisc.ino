@@ -8,7 +8,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 //#include <Servo.h>
-SoftwareSerial ble_serial(10, 11);
+SoftwareSerial ble_serial(2, 3);
 //Servo head;
 //SoftwareSerial serial(12, 13);
 #define RST_PIN         5         // Configurable, see typical pin layout above
@@ -16,12 +16,12 @@ SoftwareSerial ble_serial(10, 11);
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 //Servo head;
-const int sensorPin0 = 2;     // the number of the pushbutton pin
-const int sensorPin1 = 25;
+const int sensorPin0 = 0;     // the number of the pushbutton pin
+const int sensorPin1 = 1;
 const int sensorPin2 = 23;
 const int sensorPin3 = 41;
 const int sensorPin4 = 7;
-const int sensorPin5 = 8;      // the number of the LED pin
+const int sensorPin5 = 6;      // the number of the LED pin
 
 int connect_state;
 #define motorp  39
@@ -71,7 +71,7 @@ void setup()
   pinMode(PWM2, OUTPUT);
   pinMode(led, OUTPUT);
   pinMode(led1, OUTPUT);
-  pinMode(6, INPUT_PULLUP);
+   pinMode(8, INPUT_PULLUP);
   //////////////////////////////////////////////////////////SENSOR INPUTS////////////////////////////////////////////////////////////
   /*
     1. We have to make make sensor pins as output and make it HIGH for 10 millis second
@@ -106,15 +106,20 @@ void setup()
 void loop()
 { ////////////////////////////////////////////////////////////////////////////AUTH FOR FUTURE//////////////////////////////////////////////////////////////////////////////////////////////
  
-
-   state_();// flag=0;
-   button_state();
-  if (auth_flag == 1&& button_flag==1)//auth flag
+ //button_state();
+ //button_pin=0;
+  if (auth_flag == 1)//auth flag
   {
-  
+   
+    flag=0;
+   if(button_flag==1)
+   {
+   
+   state_();
     ble_read();
   //  Serial.println("out of exit");
     mode_switch();
-  }
+   }
+}
 }
 

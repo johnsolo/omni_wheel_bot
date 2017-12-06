@@ -9,8 +9,6 @@ void learn()
     state_();
     ble_char = 1;
     ble_read();
-      button_state();
-    
     if (flag == 1)
     {
       for (i = 0; i < count; i++)

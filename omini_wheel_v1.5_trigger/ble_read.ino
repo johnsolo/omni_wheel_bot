@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////READING DATA FROM BLE///////////////////////////////////////////////////////////////////////////
+//+++++//////////////////////////////////////////////////////////READING DATA FROM BLE///////////////////////////////////////////////////////////////////////////
 /*
    FORMAT FOR SENDING AND RECEIVING :: 0x01 MODE 0x1d INSTRUCTION 0x04// NO SPACES IN-BETWEEN
    0X01 :: START OF TEXT
@@ -14,29 +14,57 @@ void ble_read()
     //while(count<4)
     while (ble_serial.available())
 
-    {
+    {static int count2;
 
-    digitalWrite(led, LOW);
-    digitalWrite(led1, HIGH);
-delay(100);
-     // digitalWrite(led, LOW);
+//      digitalWrite(led1, LOW);
+//      digitalWrite(led, HIGH);
+//      digitalWrite(led2,HIGH);
+      //digitalWrite(led1, HIGH);
+      delay(100);
+      // digitalWrite(led, LOW);
 
       //Serial.println("available");
       ble_input[i]  = (char)ble_serial.read();
-       Serial.println(ble_input[i]);
-      i++;
+      Serial.println(ble_input[i]);
+      
+       if(ble_input[i]=='O')
+    {
+      
+        digitalWrite(led1, HIGH);
+      Serial.println("red");
+            digitalWrite(led, LOW);
+      digitalWrite(led2,HIGH);
+      listener=1;
+    //  delay(1500);
+    }
+           if(ble_input[i]=='P')
+    {
+      //count2++;
+       Serial.println("outside green");
+     // if(count2==2)
+      {
+            
+         
+       digitalWrite(led1, LOW);
+      Serial.println("blue");
+            digitalWrite(led, HIGH);
+      digitalWrite(led2,HIGH);
+
+      Serial.println("gred");
+      count2=0;
+      listener=0;
+      }
+    }
+    i++;
+//                digitalWrite(led1, HIGH);
+//      digitalWrite(led, LOW);
+//      digitalWrite(led2,HIGH);
       delay(7);
     }
-     digitalWrite(led, LOW);
-    digitalWrite(led1, HIGH);
-    delay(100);    
-    digitalWrite(led, HIGH);
-    digitalWrite(led1, LOW);
-       delay(100);  
- //   delay(500);
-
-
-
+   
+//    digitalWrite(led, HIGH);
+//    digitalWrite(led1, HIGH);
+//    digitalWrite(led2, LOW);
     if (ble_char == 0)
     {
       i = 0;
@@ -92,7 +120,7 @@ delay(100);
 
 
     }
-   // Serial.print("APP:");
+    // Serial.print("APP:");
     //flag = 1;
   }
 

@@ -1,7 +1,13 @@
 ////////////////////////////////////////////////////////////////PLAY-MODE//////////////////////////////////////////////////////////////////////////////////////////
 void play()
 {
-  Serial.println("enter into the play");
+  ble_serial.println("play");
+ // readAck();
+//    if (ack == '1')
+ //   {
+      
+//    }
+    ack='\0';
   //delay(10);
   // ble_serial.println("0x01play0x1dstart listening0x04");
 
@@ -12,12 +18,13 @@ void play()
   {
     state_();
     ble_char = 1;
-     button_state();
+   //delay(1000);
+   button_state();
     ble_read();
     direction_();
   }
   play_flag = 1;
-   Serial.println("EXIT PLAY");
+  Serial.println("EXIT PLAY");
   serial_flush();
   ble_char = 0;
 }

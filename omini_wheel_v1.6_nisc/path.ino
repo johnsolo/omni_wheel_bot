@@ -2,12 +2,11 @@
 void direction_()
 { //Serial.println("direction");
   if (flag == 1)                              //flag set to enable for ble read
-  {//ble_serial.println("listen");
+  {
     for (i = 0; i < count; i++)
     { //Serial.println(count);
       //  Serial.print("play_in");
       // Serial.print(path[2]);
-      
       switch (path[i])
       {
         case 'd':
@@ -19,7 +18,6 @@ void direction_()
             {
           //delay(2000);
           go_dance();
-         // ble_serial.println("0x01play0x1dL0x04");
           ack='\0';
             }
           for_flag = 0;

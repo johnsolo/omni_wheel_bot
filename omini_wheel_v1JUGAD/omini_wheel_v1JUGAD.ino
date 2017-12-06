@@ -1,12 +1,13 @@
 /*
    Author   : John solomon J
    Date     : 1/09/2017
-   Project  : Omni Wheel bot
+   Project  : teacher project
 */
 //software serial pins
 #include<SoftwareSerial.h>
 #include <SPI.h>
 #include <MFRC522.h>
+#include <CapacitiveSensor.h>
 //#include <Servo.h>
 SoftwareSerial ble_serial(10, 11);
 //Servo head;
@@ -36,32 +37,37 @@ int connect_state;
 //LED'S for listening
 #define led     31
 #define led1    29
+#define led2    26
 // variables w.ill change:
+int trigger_flag,prev_flag=1;
 int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
 //input from bluetooth
 char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
 String input, mode_input, password, RFID_Data, RFID_data1, RFID_data2;
 //making ble read charcter only for different modes we flag so that extra lines can be elimnated
-bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1,learn_do_flag =1;
+bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1, learn_do_flag = 1;
 //connection establisment
 bool set_, auth_flag = 1;
 String packet;
 bool for_flag;
 void ble_read();
 char ack;
-int button_flag,button_pin;
+int button_flag, button_pin;
+CapacitiveSensor   cs_4_2 = CapacitiveSensor(6, 22);
 void setup()
 {
   Serial.begin(9600);
   ble_serial.begin(9600);
+  cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
   ////////////////////////////////////////////////////RF-CARD READING PART////////////////////////////////////////////////////////
   SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init();                                              // Init MFRC522 card
   //Serial.println(F("Read personal data on a MIFARE PICC:"));    //shows in serial that it is ready to read
   ///////////////////////////////////////////////////////servo///////////////////////////////////////////////////////////////////////
- // head.attach(1);
+  // head.attach(1);
   ///////////////////////////////////////////////////MOTOR PART//////////////////////////////////////////////////////////////////////
+  cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
   pinMode(motorp, OUTPUT);
   pinMode(motorn, OUTPUT);
   pinMode(motorp1, OUTPUT);
@@ -71,7 +77,6 @@ void setup()
   pinMode(PWM2, OUTPUT);
   pinMode(led, OUTPUT);
   pinMode(led1, OUTPUT);
-  pinMode(6, INPUT_PULLUP);
   //////////////////////////////////////////////////////////SENSOR INPUTS////////////////////////////////////////////////////////////
   /*
     1. We have to make make sensor pins as output and make it HIGH for 10 millis second
@@ -102,18 +107,23 @@ void setup()
   digitalWrite(sensorPin5, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
-} 
+}
 void loop()
 { ////////////////////////////////////////////////////////////////////////////AUTH FOR FUTURE//////////////////////////////////////////////////////////////////////////////////////////////
- 
 
-   state_();// flag=0;
-   button_state();
-  if (auth_flag == 1&& button_flag==1)//auth flag
-  {
-  
+
+  state_();// flag=0;
+  button_state();
+ 
+//Serial.println("out of exit");
+
+  if (auth_flag == 1 && button_flag == 1) //auth flag
+ {
+///Serial.println("out of exit1");
+    //    ble_serial.print("");
+
     ble_read();
-  //  Serial.println("out of exit");
+    
     mode_switch();
   }
 }

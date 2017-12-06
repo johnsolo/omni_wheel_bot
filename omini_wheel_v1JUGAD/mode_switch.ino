@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////MODE SELECTION/////////////////////////////////////////////////////////////////////////////////////////
 void mode_switch()
 {
-  
+
   if (flag == 1)
   {
     if (mode_input == "do")
@@ -41,21 +41,21 @@ void mode_switch()
       mode_input = "";
       teach1();
     }
-      else if (mode_input == "learndo")
+    else if (mode_input == "learndo")
     {
       learn_do_flag = 1;
       Serial.println("play");
       mode_input = "";
       learndo_mode();
     }
-      else if (mode_input =="exit")
+    else if (mode_input == "exit")
     {
       learn_flag = 0;
       teach_flag = 0;
       do_flag = 0;
       Serial.println("exit received");
-      
-      //  flag=0;  
+
+      //  flag=0;
     }
     else
     {
@@ -65,7 +65,7 @@ void mode_switch()
   }
   flag = 0;
   count = 0;
-  i = 0;      
+  i = 0;
   ble_input[i] = '\0';
   mode_input = "";
 }

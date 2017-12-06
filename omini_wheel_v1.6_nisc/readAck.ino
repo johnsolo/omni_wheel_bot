@@ -4,7 +4,7 @@ void readAck()
   {
     if ( ble_serial.available()){
       ack = ble_serial.read();
-     // Serial.println(ack);
+      Serial.println(ack);
       break;
     }
   }

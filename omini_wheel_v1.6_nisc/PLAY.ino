@@ -12,7 +12,6 @@ void play()
   {
     state_();
     ble_char = 1;
-     button_state();
     ble_read();
     direction_();
   }

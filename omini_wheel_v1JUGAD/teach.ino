@@ -1,24 +1,35 @@
-/////////////////////////////////////////////////////////////////////////////////TEACH MODE/////////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////////TEACH MODE///////////////////////////////////////////////////////////////////////////////
 void teach()
-{ 
-  int start_flag = 0,stop_flag=1;
+{
+  int start_flag = 0, stop_flag = 1;
   memset (ble_input, '\0', sizeof(ble_input));
   serial_flush();
+  ble_serial.println("teach");
+  Serial.println("teach");
+    
+     readAck();
+    if (ack == '1')
+    {
+      
+    }
+    ack='\0';
   while (teach_flag != 0)
   { //Serial.println("again");
     rf_read();
-    ble_char=1;
-    flag=0;
-    path[0]='\0';
-     button_state();
+    ble_char = 1;
+    flag = 0;
+    path[0] = '\0';
+    button_state();
     ble_read();
-    state_(); 
-       switch(path[0])
+    state_();
+    switch (path[0])
     {
-      case 'e' : Serial.println("exit........");
-                 //ble_serial.println("0x01teach0x1dE0x04");
-                  teach_flag=0;             
-                  break;
+      case 'e' : 
+       working();
+      Serial.println("exit........");
+        ble_serial.print("0x01teach0x1dES0x04");
+        teach_flag = 0;
+        break;
       default:    break;
     }
     //Serial.println(path[0]);
@@ -27,30 +38,32 @@ void teach()
     //delay(500);
     if (RFID_Data == "START")
     {
+       working();
       Serial.println("start");
       ble_serial.println("0x01teach0x1dK0x04");
       //delay(2000);
       readAck();
-      if(ack=='1')
+      if (ack == '1')
       {
-      forward();
+        forward();
       }
       for_flag = 0;
 
       RFID_Data = "";
       count1 = 0;
-      stop_flag=0;
+      stop_flag = 0;
       start_flag = 1;
     }
     else if (RFID_Data == "LEFT" && start_flag == 1)
     {
+ working();
       Serial.println("Left");
       ble_serial.println("0x01teach0x1dL0x04");
-  //    delay(2000);+++++
-          readAck();
-      if(ack=='1')
+      //    delay(2000);+++++
+      readAck();
+      if (ack == '1')
       {
-      left();
+        left();
       }
       for_flag = 0;
 
@@ -59,14 +72,15 @@ void teach()
     }
     else if (RFID_Data == "FORWARD" && start_flag == 1 )
     {
+     working();
       Serial.println("forward");
       // encoder(motorp, motorn, 1, 0, 8,);
       ble_serial.println("0x01teach0x1dF0x04");
       //delay(2000);
-            readAck();
-      if(ack=='1')
+      readAck();
+      if (ack == '1')
       {
-      forward();
+        forward();
       }
       for_flag = 0;
       RFID_Data = " ";
@@ -74,30 +88,33 @@ void teach()
     }
     else if (RFID_Data == "STOP" && start_flag == 1)
     {
+       working();
       Serial.println("stop");
       //ble_serial.println("0x01teach0x1dstop successful0x04");
       ble_serial.println("0x01teach0x1dD0x04");
       //encoder(motorp, motorn, 0, 1, 8);
       //delay(2000);
-            readAck();
-      if(ack=='1')
+      readAck();
+      if (ack == '1')
       {
-      stop_();
-      stop_flag=1;
+         working();
+        stop_();
+        stop_flag = 1;
       }
-       ble_serial.println("0x01teach0x1da0x04");
+      ble_serial.println("0x01teach0x1da0x04");
       RFID_Data = "\0";
       count1 = 0;
     }
     else if (RFID_Data == "RIGHT" && start_flag == 1 )
     {
+       working();
       Serial.println("right");
       ble_serial.println("0x01teach0x1dR0x04");
       //delay(2000);
-         readAck();
-      if(ack=='1')
+      readAck();
+      if (ack == '1')
       {
-      right();
+        right();
       }
       for_flag = 0;
       RFID_Data = "\0";
@@ -105,6 +122,7 @@ void teach()
     }
     else if (RFID_Data == "17004454A2" && start_flag == 1)
     {
+       working();
       Serial.println("exit");
       ble_serial.println("0x01teach0x1dE0x04");
       teach_flag = 0;
@@ -120,6 +138,6 @@ void teach()
   teach_flag = 1;
   RFID_Data = "";
   Serial.println("out of teach");
-  ble_char=0;
+  ble_char = 0;
 }
 

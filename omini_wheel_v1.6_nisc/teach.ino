@@ -10,7 +10,6 @@ void teach()
     ble_char=1;
     flag=0;
     path[0]='\0';
-     button_state();
     ble_read();
     state_(); 
        switch(path[0])

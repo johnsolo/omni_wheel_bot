@@ -4,8 +4,8 @@ void working()
 //      Serial.println("blue");
 //            digitalWrite(led, HIGH);
 //      digitalWrite(led2,HIGH);
-       digitalWrite(blue, HIGH);
-      digitalWrite(green, HIGH);
+       digitalWrite(green,HIGH);
+      digitalWrite(blue, HIGH);
       digitalWrite(red,LOW);
 }
 

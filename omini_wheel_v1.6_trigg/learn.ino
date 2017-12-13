@@ -29,11 +29,19 @@ void learn()
             if (RFID_Data == "FORWARD" && start_flag == 1 && stop_flag == 0 || forward_flag == 1)
             {
               Serial.println("forward");
-              working();
+              //              head.write(90);
+              //              delay(500);
+              //              head.write(0);
+              //              delay(500);
+              //              head.write(90);
+              //              delay(500);
+              // encoder(motorp, motorn, 1, 0, 8,2);
               for_flag = 0;
               forward();
               for_flag = 0;
               forward_flag = 0;
+
+
               ble_serial.print("0x01learn0x1dFS0x04");
               readAck();
               if (ack == 1)
@@ -47,7 +55,6 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                working();
                 ble_serial.println("0x01learn0x1dW0x04");
                 wrong_left();
                 wrong_right();
@@ -88,7 +95,6 @@ void learn()
             if (RFID_Data == "LEFT" && start_flag == 1 && stop_flag == 0)
             {
               Serial.println("Left");
-              working();
               left1();
 
 
@@ -107,10 +113,13 @@ void learn()
             {
               if (start_flag == 1 && stop_flag == 0)
               {
-                working();
                 wrong_left();
                 wrong_right();
                 wrong_left();
+                digitalWrite(red,   LOW);
+                digitalWrite(green, HIGH);
+                digitalWrite(blue, HIGH);
+                
 
                 ble_serial.println("0x01learn0x1dW0x04");
 
@@ -152,8 +161,9 @@ void learn()
                 wrong_right();
                 wrong_left();
                 wrong_right();
-//                digitalWrite(led, LOW);
-//                digitalWrite(led1, HIGH);
+                digitalWrite(red, LOW);
+                digitalWrite(green, HIGH);
+                digitalWrite(blue, HIGH);
                 ble_serial.println("0x01learn0x1dW0x04");
               }
               else
@@ -246,9 +256,9 @@ void learn()
               wrong_left();
               wrong_right();
               wrong_left();
-//              digitalWrite(led, LOW);
-//              digitalWrite(led1, HIGH);
-//               digitalWrite(led1, HIGH);
+              digitalWrite(red, LOW);
+              digitalWrite(green, HIGH);
+              digitalWrite(blue, HIGH);
             }
             else if (start_flag == 0)
             {

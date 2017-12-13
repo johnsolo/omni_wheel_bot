@@ -11,77 +11,50 @@ void ble_read()
 
   if (flag == 0)
   {
-    //while(count<4)
     while (ble_serial.available())
 
-    {static int count2;
-
-//      digitalWrite(led1, LOW);
-//      digitalWrite(led, HIGH);
-//      digitalWrite(led2,HIGH);
-      //digitalWrite(led1, HIGH);
-     // delay(100);
-      // digitalWrite(led, LOW);
-
-      //Serial.println("available");
-      ble_input[i]  = (char)ble_serial.read();
+    {
+     ble_input[i]  = (char)ble_serial.read();
      Serial.println(ble_input[i]);
        if(ble_input[i]=='Z')
     {
-      //count2++;
+
        working();//Serial.println("john");
       listener=1;
-      }
-      else
-      {
-        
       }
       
        if(ble_input[i]=='O')
     {
-      
         digitalWrite(blue, HIGH);
       Serial.println("red");
             digitalWrite(green, LOW);
       digitalWrite(red,HIGH);
       listener=1;
-      
-  //   delay(5000);
     }
-           if(ble_input[i]=='P')
+    if(listener==1)
     {
-      //count2++;
-      // Serial.println("outside green");
-     // if(count2==2)
+         if(ble_input[i]=='P')
+
       {
-           // ble_serial.print("P");
-         
-       digitalWrite(blue, LOW);
-      //Serial.println("blue");
-            digitalWrite(red, HIGH);
-      digitalWrite(green,HIGH);
-
-      //Serial.println("gred");
-     // count2=0;
-      listener=0;
+        Serial.println("rece loop");
+                
+            digitalWrite(blue, LOW);
+      Serial.println("red");
+            digitalWrite(green, HIGH);
+      digitalWrite(red,HIGH);
+       counter=0;
+        listener=0; 
+        
       }
-
+       Serial.println("out loop");
+ 
     }
     i++;
-//                digitalWrite(led1, HIGH);
-//      digitalWrite(led, LOW);
-//      digitalWrite(led2,HIGH);
-      delay(7);
+   delay(7);
     }
-   
-//    digitalWrite(led, HIGH);
-//    digitalWrite(led1, HIGH);
-//    digitalWrite(led2, LOW);
-    if (ble_char == 0)
+    if (ble_char == 0  )
     {
       i = 0;
-      // Serial.println("in");
-
       if (ble_input[i] == (char)0x01)
       {
         i++;
@@ -90,8 +63,8 @@ void ble_read()
           if (ble_input[i] != (char)0x1d && ble_input[i] != (char)0x04)
           {
             mode_input += (char)ble_input[i];
-            Serial.print("control=");
-            Serial.println(mode_input);
+            //Serial.print("control=");
+            //Serial.println(mode_input);
             i++;
           }
         }
@@ -108,8 +81,8 @@ void ble_read()
         while (ble_input[i] != (char)0x1d)
         {
           mode_input += (char)ble_input[i];
-          //      Serial.print("control=");
-          //      Serial.println(mode_input);
+           //    Serial.print("control=");
+           //     Serial.println(mode_input);
           i++;
         }
 
@@ -122,18 +95,10 @@ void ble_read()
           i++;
           j++;
           count++;
-
         }
-
         flag = 1;
-
-
       }
-
-
     }
-    // Serial.print("APP:");
-    //flag = 1;
   }
 
 }

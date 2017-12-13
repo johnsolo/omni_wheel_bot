@@ -9,9 +9,9 @@ void state_()
     do_flag = 0;
     teach_flag = 0;
     learn_flag = 0;
-       digitalWrite(blue, HIGH);
-      digitalWrite(green, HIGH);
-      digitalWrite(red,LOW);
+       digitalWrite(blue, LOW);
+      digitalWrite(green, LOW);
+      digitalWrite(red,HIGH);
 //      delay(5000);
 //      digitalWrite(led, HIGH);
 //      digitalWrite(led1, HIGH);
@@ -21,6 +21,7 @@ void state_()
       FLAG=0;
    //   ble_serial.print("connected");
    Serial.println("DISCONNECTED");
+    trigger=0;
 flag1=1;
   }
   else
@@ -32,16 +33,18 @@ flag1=1;
       ble_serial.print("c");
       flag1=0;
        Serial.println("connceted1");
+       trigger=0;
+        listener=0; 
   }
           
     if(FLAG==0)
     {
   
 
-     digitalWrite(blue, LOW);
+     digitalWrite(red, LOW);
 
-            digitalWrite(red, HIGH);
-      digitalWrite(green,HIGH);
+            digitalWrite(green, LOW);
+      digitalWrite(blue,HIGH);
       FLAG=1;
      
     }

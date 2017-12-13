@@ -38,10 +38,10 @@ flag1=1;
     {
   
 
-     digitalWrite(blue, LOW);
+     digitalWrite(red, HIGH);
 
-            digitalWrite(red, HIGH);
-      digitalWrite(green,HIGH);
+            digitalWrite(green, HIGH);
+      digitalWrite(blue,LOW);
       FLAG=1;
      
     }

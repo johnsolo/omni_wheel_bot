@@ -458,8 +458,8 @@ void wrong_left()
   //sensorState1 = digitalRead(sensorPin1);
   while (sensorState0 != 1 )
   {
-//    digitalWrite(led, HIGH);
-//    digitalWrite(led1, LOW);
+    digitalWrite(red, HIGH);
+    digitalWrite(green, LOW);
     sensorState0 = digitalRead(sensorPin0);
     analogWrite(PWM2, 100);
     digitalWrite(motorp1, LOW);
@@ -501,8 +501,8 @@ void wrong_right()
   //sensorState1 = digitalRead(sensorPin1);
   while (sensorState5 != 1 )
   {
-//    digitalWrite(led, LOW);
-//    digitalWrite(led1, HIGH);
+    digitalWrite(red, LOW);
+    digitalWrite(green, HIGH);
     sensorState5 = digitalRead(sensorPin5);
     analogWrite(PWM2, 100);
     digitalWrite(motorp1, HIGH);

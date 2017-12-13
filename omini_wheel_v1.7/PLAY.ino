@@ -2,12 +2,15 @@
 void play()
 { memset (ble_input, '\0', sizeof(ble_input));
   serial_flush();
+  trigger = 1;
+  working();
   ble_serial.println("play");
   readAck();
   if (ack == '1')
   {
   }
   ack = '\0';
+  //i=0;
   while (play_flag != 0 )
   {
     state_();
@@ -24,6 +27,5 @@ void play()
   serial_flush();
   ble_char = 0;
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

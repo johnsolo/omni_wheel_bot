@@ -35,9 +35,9 @@ int connect_state;
 #define Speed1  250
 #define state   9
 //LED'S for listening
-#define red    31
-#define green  29
-#define blue   26
+#define green     31
+#define blue    29
+#define red    26
 // variables w.ill change:
 int trigger_flag,prev_flag=1;
 int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
@@ -47,12 +47,14 @@ int i = 0, count = 0, count1 = 0;
 String input, mode_input, password, RFID_Data, RFID_data1, RFID_data2;
 //making ble read charcter only for different modes we flag so that extra lines can be elimnated
 bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1, learn_do_flag = 1;
+static int inc,inc1,cont;
 //connection establisment
 bool set_, auth_flag = 1;
 String packet;
 bool for_flag;
 void ble_read();
 char ack;
+static int counter;
 int button_flag, button_pin;
 static bool listener=0;
 CapacitiveSensor   cs_4_2 = CapacitiveSensor(6, 22);
@@ -78,7 +80,7 @@ void setup()
   pinMode(PWM2, OUTPUT);
   pinMode(red, OUTPUT);
   pinMode(green, OUTPUT);
-  pinMode(blue,OUTPUT);
+  pinMode(blue, OUTPUT);
   //////////////////////////////////////////////////////////SENSOR INPUTS////////////////////////////////////////////////////////////
   /*
     1. We have to make make sensor pins as output and make it HIGH for 10 millis second

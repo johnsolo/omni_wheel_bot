@@ -16,14 +16,21 @@ void ble_read()
       Serial.println(ble_input[i]);
       if (ble_input[i] == 'Z')                        //ACK FROM TTS
       {    
-        working();
+        //working();
+       if( trigger == 0)
+       {
+   digitalWrite(green,LOW);
+   digitalWrite(blue,HIGH);
+   digitalWrite(red,HIGH);
+       }
+
       }
       if (ble_input[i] == 'O')                        //INDICATES START OF LISTENER
       {
-        digitalWrite(blue,  HIGH);
-        Serial.println("red");
-        digitalWrite(green, HIGH);
-        digitalWrite(red, HIGH);
+            digitalWrite(blue, HIGH);
+            Serial.println("red");
+            digitalWrite(green, HIGH);
+            digitalWrite(red, HIGH);
         listener = 1;
       }
       if (listener == 1)                          
@@ -37,32 +44,29 @@ void ble_read()
             ble_serial.print("listenMode");           //ONLY FOR RECEIVEING MODES AUTOMATICALLY
             inc++;
           }
-          else if (trigger == 0 && inc > 3)
+          else if (trigger == 0 && inc >= 3)
           {
             Serial.println("second time");
-            digitalWrite(blue, HIGH);
+        digitalWrite(blue, HIGH);
             Serial.println("red");
             digitalWrite(green, LOW);
             digitalWrite(red, LOW);
+           // trigger == 1
           }
           Serial.println("rece loop");        
           counter = 0;
           listener = 0;
           if (trigger == 1)
           {
- 
-          {
-           
-                      digitalWrite(blue, HIGH);
+          
+            digitalWrite(blue, HIGH);
             Serial.println("red");
             digitalWrite(green, LOW);
             digitalWrite(red, LOW);
           }
- 
-          }
         }
         Serial.println("out loop");
-    }
+      }
       i++;
       delay(7);                                         
     }

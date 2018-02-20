@@ -109,8 +109,9 @@ void rf_read()
 
   }
   Serial.print("my idea= ");
+
   RFID_Data.trim();
-  //Serial.println(RFID_Data.length());
+  Serial.println(RFID_Data.length());
   delay(200); //change value if you want to read cards faster
 
   //RFID_Data="";

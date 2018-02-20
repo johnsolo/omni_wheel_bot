@@ -20,8 +20,8 @@ void mode_switch()
       Serial.println("teach");
       teach();
       Serial.println("blue");
-//            digitalWrite(led, HIGH);
-//      digitalWrite(led2,HIGH);
+      //            digitalWrite(led, HIGH);
+      //      digitalWrite(led2,HIGH);
     }
     else if (mode_input == "learn")
     {
@@ -36,20 +36,22 @@ void mode_switch()
       Serial.println("play");
       mode_input = "";
       play();
+      //  ble_serial.println("j");
     }
-    else if (mode_input == "teach1")
+    else if (mode_input == "track")
     {
-      teach_flag = 1;
-      Serial.println("play");
+      track_flag = 1;
+      Serial.println("track");
       mode_input = "";
-      teach1();
+
+      track_mode();
     }
     else if (mode_input == "learndo")
     {
       learn_do_flag = 1;
       Serial.println("play");
       mode_input = "";
-      learndo_mode();
+      //      learndo_mode();
     }
     else if (mode_input == "exit")
     {
@@ -64,13 +66,13 @@ void mode_switch()
     {
       silence();
     }
-    else if(mode_input == " ")
+    else if (mode_input == " ")
     {
       Serial.println("invalid");
-      
+
       mode_input = "";
     }
-       
+
   }
   flag = 0;
   count = 0;

@@ -8,37 +8,47 @@
 */
 void ble_read()
 { int j = 0;
+ 
   if (flag == 0)
-  {
+  { //ble_serial.print("j");
+
     while (ble_serial.available())
-    {
+    { //Serial.println("start 3");
       ble_input[i]  = (char)ble_serial.read();
+        Serial.print("APP:");
       Serial.println(ble_input[i]);
       if (ble_input[i] == 'Z')                        //ACK FROM TTS
-      {    
-      //  working();
-  analogWrite(green, 150);
-  analogWrite(blue, 0);
-analogWrite(red, 255);
+      {
+        //  working();
+        analogWrite(green, 150);
+        analogWrite(blue, 0);
+        analogWrite(red, 255);
       }
       if (ble_input[i] == 'O')                        //INDICATES START OF LISTENER
       {
         analogWrite(blue, 255);
         Serial.println("WHITE");
-        analogWrite(green,255);
-        analogWrite(red,255);
+        analogWrite(green, 255);
+        analogWrite(red, 255);
         listener = 1;
       }
-      if (listener == 1)                          
+
+      if (blue_trig == 1 && ble_input[i] == 'P')
+      {
+        listener = 1;
+        blue_trig = 1 ;
+        blue_color();
+      }
+      if (listener == 1)
       {
         if (ble_input[i] == 'P')                      //INDICATES END OF LISTENER
         {
+
           if (trigger == 0 && inc < 3)
           {
-            Serial.print("inc=");
-            Serial.println(inc);
-            ble_serial.print("listenMode"); 
-           // ble_serial.print("P");    //ONLY FOR RECEIVEING MODES AUTOMATICALLY
+
+            ble_serial.print("listenMode");
+            // ble_serial.print("P");    //ONLY FOR RECEIVEING MODES AUTOMATICALLY
             inc++;
           }
           else if (trigger == 0 && inc >= 2)
@@ -46,29 +56,29 @@ analogWrite(red, 255);
             Serial.println("second time");
             analogWrite(blue, 255);
             Serial.println("red");
-           analogWrite(green, 0);
+            analogWrite(green, 0);
             analogWrite(red, 0);
-            inc=0;
+            inc = 0;
           }
-          Serial.println("rece loop");        
+          Serial.println("rece loop");
           counter = 0;
           listener = 0;
           if (trigger == 1)
           {
             analogWrite(blue, 255);
             Serial.println("red");
-           analogWrite(green, 0);
+            analogWrite(green, 0);
             analogWrite(red, 0);
-           //ble_serial.print("P");     
-            inc=0;
+            //ble_serial.print("P");
+            inc = 0;
           }
         }
         Serial.println("out loop");
       }
       i++;
-      delay(7);                                         
+      delay(7);
     }
- //////////////////////////////////////////////////////////////////////////////////////Algo for receving packets from APP/////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////Algo for receving packets from APP/////////////////////////////////////////////////////////////////////////////////////
     if (ble_char == 0  )
     {
       i = 0;
@@ -79,7 +89,7 @@ analogWrite(red, 255);
         {
           if (ble_input[i] != (char)0x1d && ble_input[i] != (char)0x04)
           {
-            mode_input += (char)ble_input[i];        
+            mode_input += (char)ble_input[i];
             i++;
           }
         }
@@ -87,10 +97,10 @@ analogWrite(red, 255);
       flag = 1;
     }
     else if (ble_char == 1)
-    {
+    { //Serial.println("into the read" );
       i = 0;
       if (ble_input[i] == (char)0x01)
-      { 
+      {
         i++;
         while (ble_input[i] != (char)0x1d)
         {
@@ -101,8 +111,8 @@ analogWrite(red, 255);
         while (ble_input[i] != (char)0x04)
         {
           path[j] = (char)ble_input[i];
-          Serial.print("APP:");
-          Serial.println(path[j]);
+        
+       //   Serial.println(path[j]);
           i++;
           j++;
           count++;

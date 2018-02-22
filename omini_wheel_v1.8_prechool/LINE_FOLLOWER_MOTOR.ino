@@ -24,8 +24,11 @@ void forward()
   digitalWrite(sensorPin5, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
+
+
   while (for_flag != 1)
   { //Serial.print("inin");
+
     sensorState0 = digitalRead(sensorPin0);
     sensorState1 = digitalRead(sensorPin1);
     sensorState2 = digitalRead(sensorPin2);
@@ -257,7 +260,7 @@ void right()
   Serial.println(ack);
   if (ack == 'Z')
   {
- yellow_color();
+    yellow_color();
   }
   ack = '\0';
   readAck();

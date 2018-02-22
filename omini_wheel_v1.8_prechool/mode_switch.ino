@@ -38,13 +38,13 @@ void mode_switch()
       play();
       //  ble_serial.println("j");
     }
-    else if (mode_input == "track")
+    else if (mode_input == "code")
     {
-      track_flag = 1;
-      Serial.println("track");
+      code_flag = 1;
+      Serial.println("code");
       mode_input = "";
 
-      track_mode();
+      code_mode();
     }
     else if (mode_input == "learndo")
     {

@@ -6,7 +6,7 @@ void button_state()
   long total1 =  cs_4_2.capacitiveSensor(15);
   //  Serial.print(millis() - start);        // check on performance in milliseconds
   //  Serial.print("\n");                    // tab character for debug windown spacing
-  //Serial.println(total1);                  // print sensor output 1
+  //  Serial.println(total1);                  // print sensor output 1
 
   // arbitrary delay to limit data to serial port
   long setpoint = 350;

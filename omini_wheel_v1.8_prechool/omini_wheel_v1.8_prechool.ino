@@ -1,4 +1,3 @@
-
 /*
    Author   : John solomon J
    Date     : 1/09/2017
@@ -33,8 +32,8 @@ int connect_state;
 #define motorn1 33
 #define PWM1    12
 #define PWM2    13
-#define Speed   200
-#define Speed1  200
+#define Speed   190
+#define Speed1  190
 #define state   9
 //LED'S for listening
 #define blue     4
@@ -48,7 +47,7 @@ char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
 String input, mode_input, password, RFID_Data, RFID_data1, RFID_data2;
 //making ble read charcter only for different modes we flag so that extra lines can be elimnated
-bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1, learn_do_flag = 1, track_flag = 1, switch_flag = 0;
+bool flag = 0, ble_char = 0, play_flag = 1, teach_flag = 1, learn_flag = 1, do_flag = 1, learn_do_flag = 1, code_flag = 1, switch_flag = 0;
 static int inc;
 //connection establisment
 bool set_, auth_flag = 1;
@@ -59,6 +58,7 @@ char ack;
 static int counter;
 int button_flag, button_pin;
 static bool listener = 0;
+int ins_count;
 CapacitiveSensor   cs_4_2 = CapacitiveSensor(6, 7);
 void setup()
 {
@@ -119,8 +119,6 @@ void setup()
 }
 void loop()
 { ////////////////////////////////////////////////////////////////////////////AUTH FOR FUTURE//////////////////////////////////////////////////////////////////////////////////////////////
-
-
   state_();// flag=0;
   if (listener == 0)
   {

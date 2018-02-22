@@ -8,14 +8,14 @@
 */
 void ble_read()
 { int j = 0;
- 
+
   if (flag == 0)
   { //ble_serial.print("j");
 
     while (ble_serial.available())
     { //Serial.println("start 3");
       ble_input[i]  = (char)ble_serial.read();
-        Serial.print("APP:");
+      Serial.print("APP:");
       Serial.println(ble_input[i]);
       if (ble_input[i] == 'Z')                        //ACK FROM TTS
       {
@@ -46,7 +46,8 @@ void ble_read()
 
           if (trigger == 0 && inc < 3)
           {
-
+            Serial.println("sending listen mode");
+            
             ble_serial.print("listenMode");
             // ble_serial.print("P");    //ONLY FOR RECEIVEING MODES AUTOMATICALLY
             inc++;
@@ -111,8 +112,8 @@ void ble_read()
         while (ble_input[i] != (char)0x04)
         {
           path[j] = (char)ble_input[i];
-        
-       //   Serial.println(path[j]);
+
+          //   Serial.println(path[j]);
           i++;
           j++;
           count++;

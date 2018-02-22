@@ -1,6 +1,6 @@
 /////////////////////////////////////////////FINDING WHEATHER BLE IS CONNECTED OR DISCONNECTED///////////////////////////////////////////////////////////
 void state_()
-{ int j=0;
+{ int j = 0;
   connect_state = digitalRead(state);
   //Serial.println(connect_state);
   if (connect_state == 0)
@@ -9,7 +9,7 @@ void state_()
     do_flag = 0;
     teach_flag = 0;
     learn_flag = 0;
-    track_flag=0;
+    code_flag = 0;
     analogWrite(green, 0);
     analogWrite(blue, 0);
     analogWrite(red, 255);
@@ -53,7 +53,7 @@ void state_()
       FLAG = 1;
 
     }
-    
+
   }
 }
 

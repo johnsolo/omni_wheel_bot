@@ -381,7 +381,7 @@ void learn()
             }
             else if (start_flag == 0 && stop_flag == 0)
             {
-             
+
               ble_serial.println("0x01learn0x1dW0x04");
 
             }

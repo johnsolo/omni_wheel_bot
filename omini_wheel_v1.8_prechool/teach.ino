@@ -44,8 +44,7 @@ void teach()
     }
 
     state_();
-    Serial.print("R u comin here rfid value=");
-    Serial.println(RFID_Data);
+
     switch (path[0])
     {
       case 'e' :

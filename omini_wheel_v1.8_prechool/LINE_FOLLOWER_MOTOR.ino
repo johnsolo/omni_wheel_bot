@@ -1,41 +1,17 @@
 void forward()
-{ //Serial.print("it");
-  pinMode(sensorPin0, OUTPUT);
-  digitalWrite(sensorPin0, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin0, INPUT_PULLUP);
-  pinMode(sensorPin1, OUTPUT);
-  digitalWrite(sensorPin1, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin1, INPUT_PULLUP);
-  pinMode(sensorPin2, OUTPUT);
-  digitalWrite(sensorPin2, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin2, INPUT_PULLUP);
-  pinMode(sensorPin3, OUTPUT);
-  digitalWrite(sensorPin3, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin3, INPUT_PULLUP);
-  pinMode(sensorPin4, OUTPUT);
-  digitalWrite(sensorPin4, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin4, INPUT_PULLUP);
-  pinMode(sensorPin5, OUTPUT);
-  digitalWrite(sensorPin5, HIGH);
-  delayMicroseconds(10);
-  pinMode(sensorPin5, INPUT_PULLUP);
-
-
+{ 
+ 
   while (for_flag != 1)
-  { //Serial.print("inin");
-
-    sensorState0 = digitalRead(sensorPin0);
-    sensorState1 = digitalRead(sensorPin1);
-    sensorState2 = digitalRead(sensorPin2);
-    sensorState3 = digitalRead(sensorPin3);
-    sensorState4 = digitalRead(sensorPin4);
-    sensorState5 = digitalRead(sensorPin5);
-
+  { 
+   // recharge();
+    
+   sensorState0 = digitalRead(sensorPin0);
+   sensorState1 = digitalRead(sensorPin1);
+   sensorState2 = digitalRead(sensorPin2);
+   sensorState3 = digitalRead(sensorPin3);
+   sensorState4 = digitalRead(sensorPin4);
+   sensorState5 = digitalRead(sensorPin5);
+//
     Serial.print( sensorState0);
     Serial.print("\t");
     Serial.print( sensorState1);
@@ -58,7 +34,7 @@ void forward()
       analogWrite(PWM2, Speed);
       digitalWrite(motorp1, HIGH);
       digitalWrite(motorn1, LOW);
-      Serial.println("forward");
+      //("forward");
 
     }
     else if ((sensorState0 == 0 && sensorState1 == 0 && sensorState2 == 0 && sensorState3 == 1 && sensorState4 == 0  && sensorState5 == 0) ||
@@ -103,14 +79,14 @@ void forward()
     }
     else if ((sensorState0 == 1 && sensorState1 == 1 && sensorState2 == 1 && sensorState3 == 1 && sensorState4 == 1 && sensorState5 == 1))
     {
-      delay(280);
+      delay(200);
 
       digitalWrite(motorp, HIGH);
       digitalWrite(motorn, HIGH);
       digitalWrite(motorp1, HIGH);
       digitalWrite(motorn1, HIGH);
 
-      Serial.println("stop");
+      //("stop");
 
       for_flag = 1;
       //  check();
@@ -126,10 +102,12 @@ void forward()
          digitalWrite(motorn, LOW);
          digitalWrite(motorp1, LOW);
          digitalWrite(motorn1, HIGH);
-         Serial.println("stop");
+         //("stop");
          for_flag = 1;
        }*/
+       //recharge();
   }
+  
 
 }
 void left()
@@ -140,13 +118,13 @@ void left()
   while (sensorState0 != 1 )
   {
     sensorState0 = digitalRead(sensorPin0);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 100);
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 100);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
-    Serial.println(count);
+    //(count);
 
   }
   sensorState2 = digitalRead(sensorPin2);
@@ -159,28 +137,28 @@ void left()
     sensorState4 = digitalRead(sensorPin4);
     sensorState1 = digitalRead(sensorPin1);
 
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 100);
 
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 100);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
     // delay(50);
   }
-  analogWrite(PWM2, 80);
+  analogWrite(PWM2, 100);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, LOW);
-  analogWrite(PWM1, 80);
+  analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, LOW);
-  analogWrite(PWM2, 80);
+  analogWrite(PWM2, 100);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, HIGH);
-  analogWrite(PWM1, 80);
+  analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
-  Serial.println("out");
+  //("out");
   for_flag = 0;
   ble_serial.println("0x01teach0x1dF0x04");
   //delay(2000);
@@ -205,19 +183,19 @@ void right()
 
 { // digitalWrite(led, LOW);
   //digitalWrite(led1, HIGH);
-  Serial.println("right in teach");
+  //("right in teach");
   sensorState5 = digitalRead(sensorPin5);
   //sensorState4 = digitalRead(sensorPin4);
   while (sensorState5 != 1)
   {
     sensorState5 = digitalRead(sensorPin5);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 100);
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 100);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
-    //   Serial.println(count);
+    //   //(count);
 
   }
 
@@ -230,25 +208,25 @@ void right()
     sensorState2 = digitalRead(sensorPin2);
     sensorState3 = digitalRead(sensorPin3);
 
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 100);
 
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 100);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
 
   }
-  analogWrite(PWM2, 120);
+  analogWrite(PWM2, 100);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, LOW);
-  analogWrite(PWM1, 120);
+  analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, LOW);
-  analogWrite(PWM2, 120);
+  analogWrite(PWM2, 100);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, HIGH);
-  analogWrite(PWM1, 120);
+  analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
 
@@ -257,7 +235,7 @@ void right()
   // ack = '\0';
   readAck();
   Serial.print("before=");
-  Serial.println(ack);
+  //(ack);
   if (ack == 'Z')
   {
     yellow_color();
@@ -277,10 +255,10 @@ void stop_()
 {
   //digitalWrite(led, LOW);
   //igitalWrite(led1, HIGH);
-  analogWrite(PWM2, 80);
+  analogWrite(PWM2, 100);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, HIGH);
-  analogWrite(PWM1, 80);
+  analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
 
@@ -291,13 +269,13 @@ void left1()
   while (sensorState0 != 1 )
   {
     sensorState0 = digitalRead(sensorPin0);
-    analogWrite(PWM2, 80);
+    analogWrite(PWM2, 100);
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 80);
+    analogWrite(PWM1, 100);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
-    Serial.println(count);
+    //(count);
 
   }
   sensorState2 = digitalRead(sensorPin2);
@@ -329,7 +307,7 @@ void left1()
   analogWrite(PWM1, 100);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
-  Serial.println("out");
+  //("out");
   for_flag = 0;
   //forward();
   //  for_flag = 0;
@@ -340,7 +318,7 @@ void right1()
 
 { // digitalWrite(led, LOW);
   //digitalWrite(led1, HIGH);
-
+//("right1");
   sensorState5 = digitalRead(sensorPin5);
   //sensorState4 = digitalRead(sensorPin4);
   while (sensorState5 != 1)
@@ -352,7 +330,7 @@ void right1()
     analogWrite(PWM1, 100);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
-    Serial.println(count);
+    //(count);
 
   }
 
@@ -496,13 +474,13 @@ void wrong_left()
     digitalWrite(red, HIGH);
     digitalWrite(green, LOW);
     sensorState0 = digitalRead(sensorPin0);
-    analogWrite(PWM2, 100);
+    analogWrite(PWM2, 80);
     digitalWrite(motorp1, LOW);
     digitalWrite(motorn1, HIGH);
-    analogWrite(PWM1, 100);
+    analogWrite(PWM1, 80);
     digitalWrite(motorp, HIGH);
     digitalWrite(motorn, LOW);
-    Serial.println(count);
+    //(count);
   }
   sensorState2 = digitalRead(sensorPin2);
   sensorState3 = digitalRead(sensorPin3);
@@ -526,7 +504,7 @@ void wrong_left()
   analogWrite(PWM1, 80);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
-  Serial.println("out");
+  //("out");
   for_flag = 0;
 }
 void wrong_right()
@@ -539,13 +517,13 @@ void wrong_right()
     digitalWrite(red, LOW);
     digitalWrite(green, HIGH);
     sensorState5 = digitalRead(sensorPin5);
-    analogWrite(PWM2, 100);
+    analogWrite(PWM2, 80);
     digitalWrite(motorp1, HIGH);
     digitalWrite(motorn1, LOW);
-    analogWrite(PWM1, 100);
+    analogWrite(PWM1, 80);
     digitalWrite(motorp, LOW);
     digitalWrite(motorn, HIGH);
-    Serial.println(count);
+    //(count);
   }
   sensorState2 = digitalRead(sensorPin2);
   sensorState3 = digitalRead(sensorPin3);
@@ -566,7 +544,7 @@ void wrong_right()
   analogWrite(PWM1, 80);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);
-  Serial.println("out");
+  //("out");
   for_flag = 0;
 }
 void go_dance()
@@ -610,7 +588,7 @@ void go_right1()
   analogWrite(PWM2, 180);
   digitalWrite(motorp1, HIGH);
   digitalWrite(motorn1, LOW);
-  delay(300);
+  delay(290);
   analogWrite(PWM1, 250);
   digitalWrite(motorp, HIGH);
   digitalWrite(motorn, HIGH);

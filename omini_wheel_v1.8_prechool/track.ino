@@ -1,8 +1,10 @@
 ////////////////////////////////////////////////////////////////////////code-MODE/////////////////////////////////////////////////////////////////////////////////////////////////////
 void code_mode()
 { int j, i;
+  char prev_mile;
   serial_flush();
-  Serial.println("enter into the code ");
+  int right_count,left_count;
+  //Serial.println("enter into the code ");
   ble_serial.print("code");
   readAck();
   if (ack == 'Z')
@@ -13,7 +15,7 @@ void code_mode()
   static int starttile = 1, startwrong = 0;
   trigger = 1;
   memset (ble_input, '\0', sizeof(ble_input));//SET THE ENTIRE ARRAY TO NULL
-  int start_flag = 0, stop_flag = 1, forward_flag;
+  int start_flag = 0, stop_flag = 1;
   while (code_flag != 0)
   {
     state_();
@@ -23,7 +25,8 @@ void code_mode()
     //    Serial.print("start flag=");
     //    Serial.print(startwrong);
     //
-    //    Serial.println(start_flag);
+        //Serial.println("error action completed");
+
     if (  RFID_Data != "START" && startwrong == 0 && start_flag == 0) {
       Serial.println("wrong cmd");
       if (startwrong == 0)
@@ -51,8 +54,10 @@ void code_mode()
     {
       for (i = 0; i < count; i++)
       { //Serial.println(count);
-        Serial.print("command in thelist to be executed :");
-        Serial.println(path[i]);
+//      Serial.print("command in thelist to be executed :");
+//     // Serial.println(path[i]);
+//      Serial.println(count); 
+  
         switch (path[i])
         {
           //Serial.println(i);
@@ -60,9 +65,13 @@ void code_mode()
           case 'f':
             Serial.println("forward");
             rf_read();
-            if (RFID_Data == "FORWARD" && start_flag == 1 && stop_flag == 0 || forward_flag == 1)
+            Serial.println(  RFID_Data );
+          
+            if (RFID_Data == "FORWARD" && start_flag == 1 || forward_flag==1 ||
+            ((((prev_mile=='l'&&RFID_Data == "LEFT") || (prev_mile=='r'&&RFID_Data == "RIGHT"))&& (RFID_Data != "START" ||RFID_Data == "STOP"))
+            && (left_count<2 || right_count<2)))
             {
-              Serial.println("forward");
+              //("forward");
               // encoder(motorp, motorn, 1, 0, 8,2);
               for_flag = 0;
               green_color();
@@ -84,7 +93,7 @@ void code_mode()
               { int j = 0, k;
                 ble_serial.print("0x01code0x1dW0x04");
 
-                // RFID_Data = "\0";
+                 RFID_Data = "\0";
                 // i=0;
 
                 //ins_count=0;
@@ -103,7 +112,8 @@ void code_mode()
 
 
                 }
-
+                error_action();
+                //start_flag = 0 ;starttile = 1;
                 ack = '\0';
                 while (path[j] != '\0')
                 {
@@ -111,8 +121,8 @@ void code_mode()
                   j++;
                 }
                 j = 0;
-                error_action();
-                Serial.println("out");
+                
+                //Serial.println("out");
                 trigger = 1;
                 listener = 0;
               }
@@ -143,14 +153,14 @@ void code_mode()
               //;
               //   encoder(motorp1, motorn1, 0, 1);
               rf_read();
-              if (RFID_Data == "LEFT" && start_flag == 1 && stop_flag == 0)
+              if (RFID_Data == "LEFT" && start_flag ==1 && stop_flag ==0 || (prev_mile=='l' && path[0] !='l' && RFID_Data == "LEFT"))
               {
-                Serial.println("Left");
+                //("Left");
                 green_color();
                 left1();
                 delay(1000);
                 ble_serial.print("0x01code0x1dLS0x04");
-
+                left_count++;
                 RFID_Data = "\0";
                 forward_flag = 1;
                 count1 = 0;
@@ -158,7 +168,7 @@ void code_mode()
               }
               else
               {
-                if (start_flag == 1 && stop_flag == 0)
+                if (start_flag == 1 )
                 {
                   ble_serial.print("0x01code0x1dW0x04");
                   trigger = 1;
@@ -178,15 +188,17 @@ void code_mode()
 
                   }
                   ack = '\0';
+                  error_action();
+                  //start_flag = 0 ;starttile = 1;
                   while (path[j] != '\0')
                   {
 
-                    Serial.println(path[j]);
+                    //Serial.println(path[j]);
                     path[j] = '\0';
                     j++;
                   }
                   j = 0;
-                  error_action();
+                  
                 }
 
               }
@@ -197,43 +209,47 @@ void code_mode()
               //  encoder(motorp1, motorn1, 0, 1);
               rf_read();
 
-              if (RFID_Data == "RIGHT" && start_flag == 1 && stop_flag == 0)
+              if (RFID_Data == "RIGHT" && start_flag == 1 ||(prev_mile=='r' && path[0] !='r' && RFID_Data == "RIGHT") )
               {
-                Serial.println("right");
+                //("right");
                 green_color();
                 right1();
                 delay(1000); ble_serial.print("0x01code0x1dRS0x04");
 
-                RFID_Data = "\0";
+               RFID_Data = "\0";
                 forward_flag = 1;
                 count1 = 0;
+                right_count++;
                 ins_count++;
               }
               else
               {
-                error_action();
+                
                 {
                   Serial.println("wrong cmd0");
                   ble_serial.print("0x01code0x1dW0x04");
                   // red_color();
                   count = 0;
                   //RFID_Data = "\0";
-                  readAck();
-                  if (ack == 'Z')
-                  {
-                    yellow_color();
-
-
-                  }
-                  ack = '\0';
-                  readAck();
-                  if (ack == '1')
-                  {
-                    blue_color();
-
-
-                  }
-                  ack = '\0';
+//                  readAck();
+//                  if (ack == 'Z')
+//                  {
+//                    yellow_color();
+//
+//
+//                  }
+//                  ack = '\0';
+//                  readAck();
+//                  if (ack == '1')
+//                  {
+//                    blue_color();
+//
+//
+//                  }
+//                  ack = '\0';
+                  error_action();
+                  //start_flag = 0 ;starttile = 1;
+                  
                   while (path[j] != '\0')
                   {
                     path[j] = '\0';
@@ -241,7 +257,7 @@ void code_mode()
                   }
 
                   j = 0;
-                  error_action();
+                  
 
                   trigger = 1;
                   listener = 0;
@@ -273,15 +289,15 @@ void code_mode()
               Serial.println("stop code");
               //code_flag = 0;
               rf_read();
-              if (RFID_Data == "STOP" && start_flag == 1 && stop_flag == 0)
+              if (RFID_Data == "STOP" && start_flag == 1 )
               {
-                Serial.println("stop");
+                //("stop");
                 green_color();
                 stop_();
                 stop_flag = 1;
-                startwrong = 0;
-                starttile = 1;
-                start_flag = 0;
+               
+//                starttile = 1;
+//                start_flag = 0;
                 ble_serial.print("0x01code0x1dSS0x04");
                 readAck();
                 if (ack == 'Z')
@@ -328,13 +344,15 @@ void code_mode()
 
                   }
                   ack = '\0';
+                     error_action();
+                     start_flag = 0 ;starttile = 1;
                   while (path[j] != '\0')
                   {
                     path[j] = '\0';
                     j++;
                   }
                   j = 0;
-                  error_action();
+               
                   trigger = 1;
                   listener = 0;
                 }
@@ -343,9 +361,11 @@ void code_mode()
             case 'k':
               //;
               rf_read();
-              if (RFID_Data == "START" && stop_flag == 1)
+              Serial.print("start=");
+               Serial.println(RFID_Data);
+              if (RFID_Data == "START" )
               {
-                Serial.println("start");
+                
                 for_flag = 0;
                 green_color();
                 forward();
@@ -360,7 +380,7 @@ void code_mode()
                 stop_flag = 0;
               }
               else
-              { ins_count = 0;
+              { //ins_count = 0;
                 ble_serial.print("0x01code0x1dW0x04");
                 // RFID_Data = "\0";
                 count = 0;
@@ -376,13 +396,15 @@ void code_mode()
                   blue_color();
                 }
                 ack = '\0';
+                 error_action();
+                 
                 while (path[j] != '\0')
                 {
                   path[j] = '\0';
                   j++;
                 }
                 j = 0;
-                error_action();
+               
                 trigger = 1;
                 listener = 0;
                 //button_state();
@@ -390,13 +412,24 @@ void code_mode()
 
               break;
             default:
-              Serial.println("invalid");
-              Serial.println(path[i]);
+              //Serial.println("invalid");
+              //Serial.println(path[i]);
               trigger = 1;
               listener = 0;
               break;
             }
+                
         }
+        Serial.print("what is the count value=");
+   Serial.println(count);
+      if(ins_count==count && ins_count>0)
+      { prev_mile=='\0';
+        prev_mile=path[count-1];
+        Serial.println("prev_mile");
+        Serial.println(prev_mile);
+        right_count=0;
+        left_count=0;
+      }     
       }
       flag = 0;
       count = 0;
@@ -404,10 +437,11 @@ void code_mode()
       ble_input[i] = '\0';
       trigger = 1;
       listener = 0;
+      ins_count=0;
     }
   }
   code_flag = 1;
-  serial_flush();
+ // serial_flush();
   ble_char = 0;
   start_flag = 0;
   starttile = 1;

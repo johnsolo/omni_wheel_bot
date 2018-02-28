@@ -32,15 +32,15 @@ int connect_state;
 #define motorn1 33
 #define PWM1    12
 #define PWM2    13
-#define Speed   190
-#define Speed1  190
+#define Speed   200
+#define Speed1 200
 #define state   9
 //LED'S for listening
 #define blue     4
 #define red      3
 #define green    2
 // variables w.ill change:
-int trigger_flag, prev_flag = 1, trigger;
+int trigger_flag, prev_flag = 1, trigger, forward_flag;
 int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
 //input from bluetooth
 char ble_input[100], path[100];

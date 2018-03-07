@@ -10,6 +10,7 @@
 #include <CapacitiveSensor.h>
 //#include <Servo.h>
 SoftwareSerial ble_serial(10, 11);
+int rl_flag=0;
 //Servo head;
 //SoftwareSerial serial(12, 13);
 #define RST_PIN         5         // Configurable, see typical pin layout above
@@ -24,6 +25,9 @@ const int sensorPin2 = 25;
 const int sensorPin3 = 24;
 const int sensorPin4 = 27;
 const int sensorPin5 = 26;    // the number of the LED pin   // the number of the LED pin
+const int sensorPin6 = 34;
+const int sensorPin7 = 35;
+
 static int FLAG, flag1;
 int connect_state;
 #define motorp  30
@@ -32,8 +36,8 @@ int connect_state;
 #define motorn1 33
 #define PWM1    12
 #define PWM2    13
-#define Speed   200
-#define Speed1 200
+#define Speed   180
+#define Speed1  180
 #define state   9
 //LED'S for listening
 #define blue     4
@@ -41,7 +45,7 @@ int connect_state;
 #define green    2
 // variables w.ill change:
 int trigger_flag, prev_flag = 1, trigger, forward_flag;
-int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5;   // variable for reading the pushbutton status
+int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5,sensorState6,sensorState7;   // variable for reading the pushbutton status
 //input from bluetooth
 char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
@@ -61,13 +65,13 @@ static bool listener = 0;
 int ins_count;
 CapacitiveSensor   cs_4_2 = CapacitiveSensor(6, 7);
 void setup()
-{
+{  mfrc522.PCD_Init();
   Serial.begin(9600);
   ble_serial.begin(9600);
   cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
   ////////////////////////////////////////////////////RF-CARD READING PART////////////////////////////////////////////////////////
   SPI.begin();                                                  // Init SPI bus
-  mfrc522.PCD_Init();                                              // Init MFRC522 card
+  //mfrc522.PCD_Init();                                              // Init MFRC522 card
   //Serial.println(F("Read personal data on a MIFARE PICC:"));    //shows in serial that it is ready to read
   ///////////////////////////////////////////////////////servo///////////////////////////////////////////////////////////////////////
   // head.attach(1);
@@ -113,6 +117,14 @@ void setup()
   digitalWrite(sensorPin5, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
+    pinMode(sensorPin6, OUTPUT);
+  digitalWrite(sensorPin6, HIGH);
+  delayMicroseconds(10);
+  pinMode(sensorPin6, INPUT_PULLUP);
+      pinMode(sensorPin7, OUTPUT);
+  digitalWrite(sensorPin7, HIGH);
+  delayMicroseconds(10);
+  pinMode(sensorPin7, INPUT_PULLUP);
 
 
   // Serial.println("gred");
@@ -123,12 +135,13 @@ void loop()
   if (listener == 0)
   {
     button_state();
+    
   }
   if ((auth_flag == 1 && button_flag == 1) || switch_flag == 1) //auth flag
   {
     ble_read();
     mode_switch();
-    ble_read();
+   // ble_read();
   }
 
 }

@@ -23,6 +23,7 @@ void ble_read()
         analogWrite(green, 150);
         analogWrite(blue, 0);
         analogWrite(red, 255);
+        listener = 1;
       }
       if (ble_input[i] == 'O')                        //INDICATES START OF LISTENER
       {
@@ -60,10 +61,12 @@ void ble_read()
             analogWrite(green, 0);
             analogWrite(red, 0);
             inc = 0;
+            
           }
           Serial.println("rece loop");
-          counter = 0;
           listener = 0;
+          counter = 0;
+          
           if (trigger == 1)
           {
             analogWrite(blue, 255);

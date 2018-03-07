@@ -74,7 +74,7 @@ void teach()
     // Serial.println( RFID_Data);
     //delay(500);
     
-    if (RFID_Data == "START")
+    if (RFID_Data == "START" && stop_flag == 1 )
     {
       working();
       Serial.println("start");
@@ -121,7 +121,7 @@ void teach()
       
       ack = '\0';
       for_flag = 0;
-      RFID_Data = " ";
+      RFID_Data = "\0";
       count1 = 0;
     }
     else if (RFID_Data == "FORWARD" && start_flag == 1 )
@@ -143,9 +143,9 @@ void teach()
         green_color();
         forward();
       }
-       ack = '\0';
+      ack = '\0';
       for_flag = 0;
-      RFID_Data = " ";
+      RFID_Data = "\0";
       count1 = 0;
     }
     else if (RFID_Data == "STOP" && start_flag == 1)
@@ -173,7 +173,7 @@ void teach()
         stop_flag = 1;
       }
        ack = '\0';
-      ble_serial.println("0x01teach0x1da0x04");
+       ble_serial.println("0x01teach0x1da0x04");
 
       readAck();
       if (ack == 'Z')
@@ -186,6 +186,7 @@ void teach()
       {
         blue_color();
       }
+      start_flag=0;
  ack = '\0';
       RFID_Data = "\0";
       count1 = 0;
@@ -211,7 +212,9 @@ void teach()
       }
       ack = '\0';
       for_flag = 0;
-      RFID_Data = " ";
+      RFID_Data = "\0";
+     // start_flag =0;
+      stop_flag=1;
       count1 = 0;
     }
     else if (RFID_Data == "17004454A2" && start_flag == 1)

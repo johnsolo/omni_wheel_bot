@@ -1,5 +1,14 @@
 void rf_read()
 {
+  while( RFID_Data =="\0")
+  {
+  if(rl_flag==0)
+  {
+    mfrc522.PCD_Init();  
+  }
+       
+  Serial.print("i am in rf:"); 
+   Serial.print(RFID_Data);
   // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
   for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
@@ -112,11 +121,14 @@ void rf_read()
 
   RFID_Data.trim();
   Serial.println(RFID_Data.length());
-  delay(200); //change value if you want to read cards faster
+ 
+  
+  delay(20); //change value if you want to read cards faster
 
   //RFID_Data="";
   mfrc522.PICC_HaltA();
   mfrc522.PCD_StopCrypto1();
   flag = 1;
   count1 = 0;
+  }
 }

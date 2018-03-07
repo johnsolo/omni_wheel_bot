@@ -4,8 +4,8 @@ void learn()
   memset (ble_input, '\0', sizeof(ble_input));
   int start_flag, stop_flag = 1, forward_flag;
   serial_flush();
- trigger=1;
-   analogWrite(green, 150);
+  trigger = 1;
+  analogWrite(green, 150);
   analogWrite(blue, 0);
   analogWrite(red, 255);
   readAck();
@@ -61,16 +61,16 @@ void learn()
               else
               {
                 ble_serial.println("0x01learn0x1dI0x04");
-                 if (ack == 'Z')
-              {
-                yellow_color();
-              }
-               ack='\0';
-                                if (ack == '1')
-              {
-                blue_color();
-              }
-               ack='\0';
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                if (ack == '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
               }
             }
 
@@ -94,24 +94,24 @@ void learn()
               {
                 ble_serial.println("0x01learn0x1dI0x04");
                 if (ack == 'Z')
-              {
-                yellow_color();
-              }
-               ack='\0';
-                                if (ack == '1')
-              {
-                blue_color();
-              }
-               ack='\0';
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                if (ack == '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
               }
             }
             break;
           case 'l':
             Serial.println("left");
             //   encoder(motorp1, motorn1, 0, 1);
-           
+
             rf_read();
-            
+
             if (RFID_Data == "LEFT" && start_flag == 1 && stop_flag == 0)
             { working();
               Serial.println("Left");
@@ -136,24 +136,24 @@ void learn()
                 wrong_left();
                 wrong_right();
                 wrong_left();
-        
+
               }
               else
               {
                 ble_serial.println("0x01learn0x1dI0x04");
                 readAck();
                 if (ack == 'Z')
-              {
-                yellow_color();
-              }
-               ack='\0';
+                {
+                  yellow_color();
+                }
+                ack = '\0';
                 readAck();
-                                if (ack == '1')
-              {
-                blue_color();
-              }
-               ack='\0';
-                
+                if (ack == '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
+
               }
             }
             break;
@@ -191,23 +191,23 @@ void learn()
                 wrong_right();
                 wrong_left();
                 wrong_right();
-                
+
               }
               else
               {
                 ble_serial.println("0x01learn0x1dI0x04");
-                 readAck();
+                readAck();
                 if (ack == 'Z')
-              {
-                yellow_color();
-              }
-               ack='\0';
-               readAck();
-                                if (ack == '1')
-              {
-                blue_color();
-              }
-               ack='\0';
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                readAck();
+                if (ack == '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
               }
             }
             break;
@@ -215,8 +215,8 @@ void learn()
           case 'e':
             Serial.println("exit play");
             learn_flag = 0;
-            listener=0;
-            trigger=0;
+            listener = 0;
+            trigger = 0;
             rf_read();
             if (start_flag == 1)
             {
@@ -224,21 +224,21 @@ void learn()
 
 
               ble_serial.print("0x01learn0x1dES0x04");
-                        
-                    readAck();
-                            if (ack=='Z')
-                            { Serial.println("z came");
-                              yellow_color();
-                            }
-              ack = '\0';     
-                        
-                        readAck();
-                        
-                            if (ack=='1')
-                            {
-                              Serial.println("1 came");
-                              blue_color();
-                            }
+
+              readAck();
+              if (ack == 'Z')
+              { Serial.println("z came");
+                yellow_color();
+              }
+              ack = '\0';
+
+              readAck();
+
+              if (ack == '1')
+              {
+                Serial.println("1 came");
+                blue_color();
+              }
               ack = '\0';
 
               RFID_Data = "";
@@ -248,20 +248,20 @@ void learn()
             {
               {
                 ble_serial.print("0x01learn0x1dI0x04");
-                              
-                    readAck();
-                            while (ack!='Z')
-                            {
-                              yellow_color();
-                            }
-              ack = '\0';     
-                        
-                        readAck();
-                            while (ack!='1')
-                            {
-                              blue_color();
-                            }
-              ack = '\0';
+
+                readAck();
+                while (ack != 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+
+                readAck();
+                while (ack != '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
               }
             }
             break;
@@ -276,22 +276,22 @@ void learn()
               stop_flag = 1;
               ble_serial.print("0x01learn0x1dSS0x04");
               // learn_flag = 0;
-                        readAck();
-                    if (ack == 'Z')
-      {
-        yellow_color();
-        
-       
-      }
-   ack='\0';
               readAck();
-                    if (ack == '1')
-      {
-              blue_color();
-        
-       
-      }
-      ack='\0';
+              if (ack == 'Z')
+              {
+                yellow_color();
+
+
+              }
+              ack = '\0';
+              readAck();
+              if (ack == '1')
+              {
+                blue_color();
+
+
+              }
+              ack = '\0';
               RFID_Data = "";
               count1 = 0;
             }
@@ -301,27 +301,27 @@ void learn()
               {
                 red_color();
                 ble_serial.print("0x01learn0x1dW0x04");
-                                wrong_right();
+                wrong_right();
                 wrong_left();
                 wrong_right();
               }
               else
               {
                 ble_serial.print("0x01learn0x1dI0x04");
-                              
-                    readAck();
-                            if (ack=='Z')
-                            {
-                              yellow_color();
-                            }
-              ack = '\0';     
-                        
-                        readAck();
-                            if (ack=='1')
-                            {
-                              blue_color();
-                            }
-              ack = '\0';
+
+                readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+
+                readAck();
+                if (ack == '1')
+                {
+                  blue_color();
+                }
+                ack = '\0';
               }
             }
             break;
@@ -355,48 +355,46 @@ void learn()
             {
               red_color();
               ble_serial.println("0x01learn0x1dW0x04");
-              
+
               wrong_left();
               wrong_right();
               wrong_left();
-              
+
             }
             else if (start_flag == 0)
             {
-              
+
               ble_serial.println("0x01learn0x1dI0x04");
-               readAck();
-                            if (ack=='Z')
-                            {
-                              yellow_color();
-                            }
-              ack = '\0';     
-                        
-                        readAck();
-                            if (ack=='1')
-                            {
-                              blue_color();
-                            }
+              readAck();
+              if (ack == 'Z')
+              {
+                yellow_color();
+              }
+              ack = '\0';
+
+              readAck();
+              if (ack == '1')
+              {
+                blue_color();
+              }
               ack = '\0';
             }
             else if (start_flag == 0 && stop_flag == 0)
             {
-              red_color();
+
               ble_serial.println("0x01learn0x1dW0x04");
-            wrong_left();
-            wrong_right();
-            wrong_left(); 
+
             }
 
             break;
-          case 'w':                 
+          case 'w':
             red_color();
             wrong_left();
             wrong_right();
             wrong_left();
-            
+
             break;
-             case '!':
+          case '!':
             rf_read();
             Serial.print("rfid");
             Serial.println(RFID_Data);
@@ -430,37 +428,37 @@ void learn()
             {
               red_color();
               ble_serial.println("0x01learn0x1dW0x04");
-              
+
               wrong_left();
               wrong_right();
               wrong_left();
-              
+
             }
             else if (start_flag == 0)
             {
-              
+
               ble_serial.println("0x01learn0x1dI0x04");
-               readAck();
-                            if (ack=='Z')
-                            {
-                              yellow_color();
-                            }
-              ack = '\0';     
-                        
-                        readAck();
-                            if (ack=='1')
-                            {
-                              blue_color();
-                            }
+              readAck();
+              if (ack == 'Z')
+              {
+                yellow_color();
+              }
+              ack = '\0';
+
+              readAck();
+              if (ack == '1')
+              {
+                blue_color();
+              }
               ack = '\0';
             }
             else if (start_flag == 0 && stop_flag == 0)
             {
               red_color();
               ble_serial.println("0x01learn0x1dW0x04");
-            wrong_left();
-            wrong_right();
-            wrong_left(); 
+              wrong_left();
+              wrong_right();
+              wrong_left();
             }
 
             break;
@@ -479,10 +477,10 @@ void learn()
     }
   }
   flag = 0;  //Serial.println(flag);
- 
+
   serial_flush();
   ble_char = 0;
-   delay(10);
-   ble_serial.println("j");
+  delay(10);
+  ble_serial.println("j");
 }
 

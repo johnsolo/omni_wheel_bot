@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////MODE SELECTION/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////MODE SELECTION/////////////////////////////////////////////////////////////////////////////////////////
 void mode_switch()
 {
 
@@ -36,22 +36,22 @@ void mode_switch()
       Serial.println("play");
       mode_input = "";
       play();
-    //  ble_serial.println("j");
+      //  ble_serial.println("j");
     }
-    else if (mode_input == "track")
+    else if (mode_input == "code")
     {
-      track_flag = 1;
-      Serial.println("track");
+      code_flag = 1;
+      Serial.println("code");
       mode_input = "";
-        
-      track_mode();
+
+      code_mode();
     }
     else if (mode_input == "learndo")
     {
       learn_do_flag = 1;
       Serial.println("play");
       mode_input = "";
-//      learndo_mode();
+      //      learndo_mode();
     }
     else if (mode_input == "exit")
     {

@@ -18,7 +18,13 @@ void green_color()
 }
 void yellow_color()
 {
-        analogWrite(green, 150);
-        analogWrite(blue, 0);
-        analogWrite(red, 255);
+  analogWrite(green, 150);
+  analogWrite(blue, 0);
+  analogWrite(red, 255);
+}
+void white_color()
+{
+  analogWrite(green, 255);
+  analogWrite(blue, 250);
+  analogWrite(red, 255);
 }

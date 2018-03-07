@@ -6,11 +6,11 @@ void button_state()
   long total1 =  cs_4_2.capacitiveSensor(15);
   //  Serial.print(millis() - start);        // check on performance in milliseconds
   //  Serial.print("\n");                    // tab character for debug windown spacing
-  //Serial.println(total1);                  // print sensor output 1
+    Serial.println(total1);                  // print sensor output 1
 
   // arbitrary delay to limit data to serial port
-  long setpoint = 400;
-//  Serial.println(total1);
+  long setpoint = 350;
+  //  Serial.println(total1);
   if (total1  >= setpoint && trigger_flag == 0)
   {
     digitalWrite(11, LOW);

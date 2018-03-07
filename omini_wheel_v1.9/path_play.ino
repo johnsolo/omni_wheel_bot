@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////////FOR PLAY MODE ONLY/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////FOR PLAY MODE ONLY/////////////////////////////////////////////////////////////////////////////
 void direction_()
 {
   //Serial.println("direction");
@@ -71,12 +71,12 @@ void direction_()
             delay(100);
             go_right1();
             delay(100);
-               go_right1();
+            go_right1();
             delay(100);
-               go_left1();
+            go_left1();
             delay(100);
-         
-         
+
+
             //                  digitalWrite(blue, LOW);
             //            digitalWrite(red, HIGH);
             //      digitalWrite(green,HIGH);
@@ -131,39 +131,39 @@ void direction_()
           trigger = 0;
           inc = 0;
           listener = 0;
-          switch_flag=1;
+          switch_flag = 1;
 
 
 
           // delay(20);
           Serial.println("EXIT play");
- 
+
           ble_serial.print("0x01play0x1dES0x04");
-  readAck();
- if (ack == 'Z')
- {
-           analogWrite(green, 150);
-        analogWrite(blue, 0);
-        analogWrite(red, 255);
-      Serial.println("ooo play");
-  }
-  ack = '\0';
-  readAck();
- if (ack == '1')
- {
-   blue_color();
-   delay(1000);
-      Serial.println("ooo play");
-  }
-  ack = '\0';
-    
-//          analogWrite(green, 150);
-//          analogWrite(blue, 0);
-//          analogWrite(red, 255);
-//          delay(2000);
-//          analogWrite(blue, 255);
-//          analogWrite(red, 0);
-//          analogWrite(green, 0);
+          readAck();
+          if (ack == 'Z')
+          {
+            analogWrite(green, 150);
+            analogWrite(blue, 0);
+            analogWrite(red, 255);
+            Serial.println("ooo play");
+          }
+          ack = '\0';
+          readAck();
+          if (ack == '1')
+          {
+            blue_color();
+            delay(1000);
+            Serial.println("ooo play");
+          }
+          ack = '\0';
+
+          //          analogWrite(green, 150);
+          //          analogWrite(blue, 0);
+          //          analogWrite(red, 255);
+          //          delay(2000);
+          //          analogWrite(blue, 255);
+          //          analogWrite(red, 0);
+          //          analogWrite(green, 0);
           break;
         case 'b':
           Serial.print("back");

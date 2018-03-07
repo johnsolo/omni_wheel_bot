@@ -8,13 +8,14 @@
 */
 void ble_read()
 { int j = 0;
-//Serial.println("start 1");
+
   if (flag == 0)
-  {//ble_serial.print("j");
+  { //ble_serial.print("j");
 
     while (ble_serial.available())
-    {//Serial.println("start 3");
+    { //Serial.println("start 3");
       ble_input[i]  = (char)ble_serial.read();
+      Serial.print("APP:");
       Serial.println(ble_input[i]);
       if (ble_input[i] == 'Z')                        //ACK FROM TTS
       {
@@ -22,6 +23,7 @@ void ble_read()
         analogWrite(green, 150);
         analogWrite(blue, 0);
         analogWrite(red, 255);
+        listener = 1;
       }
       if (ble_input[i] == 'O')                        //INDICATES START OF LISTENER
       {
@@ -32,20 +34,21 @@ void ble_read()
         listener = 1;
       }
 
-            if(blue_trig==1 &&ble_input[i] == 'P')
-            {
-              listener =1;
-              blue_trig=1 ;
-              blue_color();
-            }
+      if (blue_trig == 1 && ble_input[i] == 'P')
+      {
+        listener = 1;
+        blue_trig = 1 ;
+        blue_color();
+      }
       if (listener == 1)
-      {  
+      {
         if (ble_input[i] == 'P')                      //INDICATES END OF LISTENER
         {
 
           if (trigger == 0 && inc < 3)
           {
-
+            Serial.println("sending listen mode");
+            
             ble_serial.print("listenMode");
             // ble_serial.print("P");    //ONLY FOR RECEIVEING MODES AUTOMATICALLY
             inc++;
@@ -58,10 +61,12 @@ void ble_read()
             analogWrite(green, 0);
             analogWrite(red, 0);
             inc = 0;
+            
           }
           Serial.println("rece loop");
-          counter = 0;
           listener = 0;
+          counter = 0;
+          
           if (trigger == 1)
           {
             analogWrite(blue, 255);
@@ -96,8 +101,8 @@ void ble_read()
       flag = 1;
     }
     else if (ble_char == 1)
-    {
-      i = index;
+    { //Serial.println("into the read" );
+      i = 0;
       if (ble_input[i] == (char)0x01)
       {
         i++;
@@ -110,8 +115,8 @@ void ble_read()
         while (ble_input[i] != (char)0x04)
         {
           path[j] = (char)ble_input[i];
-          Serial.print("APP:");
-          Serial.println(path[j]);
+
+          //   Serial.println(path[j]);
           i++;
           j++;
           count++;

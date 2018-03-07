@@ -124,6 +124,47 @@ void teach()
       RFID_Data = "\0";
       count1 = 0;
     }
+     else if (RFID_Data == "!" && start_flag == 1 )
+    {
+      //working();
+      Serial.println("right");
+      ble_serial.println("0x01teach0x1d!0x04");
+      //delay(2000);
+      readAck();
+      if (ack == 'Z')
+      { Serial.println("special");
+        yellow_color();
+      }
+      ack = '\0';
+      readAck();
+      if (ack == '1')
+      { Serial.println("special");
+
+        // forward();
+      }
+      ack = '\0';
+            readAck();
+      if (ack == 'Z')
+      { Serial.println("forward");
+        yellow_color();
+      }
+      ack = '\0';
+      readAck();
+      if (ack == '1')
+      
+      {  green_color();
+        Serial.println("forward");
+         for_flag=0;
+         forward();
+         for_flag=1;
+      }
+      ack = '\0';
+      for_flag = 0;
+      RFID_Data = "\0";
+     // start_flag =0;
+      stop_flag=1;
+      count1 = 0;
+    }
     else if (RFID_Data == "FORWARD" && start_flag == 1 )
     {
       // working();

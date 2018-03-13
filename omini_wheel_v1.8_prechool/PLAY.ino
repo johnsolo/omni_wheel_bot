@@ -8,6 +8,18 @@ void play()
   analogWrite(blue, 0);
   analogWrite(red, 255);
   ble_serial.println("play");
+   readAck();
+  if (ack == 'Z')
+  {
+    yellow_color();
+  }
+  ack = '\0';
+  readAck();
+  if (ack == '1')
+  {
+
+  }
+  ack = '\0';
   while (play_flag != 0 )
   {
     state_();

@@ -10,9 +10,7 @@ void state_()
     teach_flag = 0;
     learn_flag = 0;
     code_flag = 0;
-    analogWrite(green, 0);
-    analogWrite(blue, 0);
-    analogWrite(red, 255);
+    red_color();
     for (int fadeValue = 0 ; fadeValue <= 100; fadeValue += 5) {
       // sets the value (range from 0 to 255):
       //   analogWrite(blue, fadeValue);
@@ -47,11 +45,8 @@ void state_()
     }
     if (FLAG == 0)
     {
-      analogWrite(red, 0);
-      analogWrite(green, 0);
-      analogWrite(blue, 255);
+      blue_color();
       FLAG = 1;
-
     }
 
   }

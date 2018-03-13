@@ -20,23 +20,18 @@ void ble_read()
       if (ble_input[i] == 'Z')                        //ACK FROM TTS
       {
         //  working();
-        analogWrite(green, 150);
-        analogWrite(blue, 0);
-        analogWrite(red, 255);
+        yellow_color();
         listener = 1;
       }
       if (ble_input[i] == 'O')                        //INDICATES START OF LISTENER
       {
-        analogWrite(blue, 255);
-        Serial.println("WHITE");
-        analogWrite(green, 255);
-        analogWrite(red, 255);
+        white_color();
         listener = 1;
       }
 
       if (blue_trig == 1 && ble_input[i] == 'P')
       {
-        listener = 1;
+        listener = 0;
         blue_trig = 1 ;
         blue_color();
       }
@@ -48,7 +43,7 @@ void ble_read()
           if (trigger == 0 && inc < 3)
           {
             Serial.println("sending listen mode");
-            
+
             ble_serial.print("listenMode");
             // ble_serial.print("P");    //ONLY FOR RECEIVEING MODES AUTOMATICALLY
             inc++;
@@ -56,23 +51,17 @@ void ble_read()
           else if (trigger == 0 && inc >= 2)
           {
             Serial.println("second time");
-            analogWrite(blue, 255);
-            Serial.println("red");
-            analogWrite(green, 0);
-            analogWrite(red, 0);
+            blue_color();
             inc = 0;
-            
+
           }
           Serial.println("rece loop");
           listener = 0;
           counter = 0;
-          
+
           if (trigger == 1)
           {
-            analogWrite(blue, 255);
-            Serial.println("red");
-            analogWrite(green, 0);
-            analogWrite(red, 0);
+            blue_color();
             //ble_serial.print("P");
             inc = 0;
           }
@@ -115,8 +104,6 @@ void ble_read()
         while (ble_input[i] != (char)0x04)
         {
           path[j] = (char)ble_input[i];
-
-          //   Serial.println(path[j]);
           i++;
           j++;
           count++;

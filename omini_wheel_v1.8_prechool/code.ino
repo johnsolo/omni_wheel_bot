@@ -1,11 +1,13 @@
 ////////////////////////////////////////////////////////////////////////code-MODE/////////////////////////////////////////////////////////////////////////////////////////////////////
 void code_mode()
-{ int j, i, spec_count;
+{
+  
+  int j, i, spec_count;
   bool finish_flag = 0;
-  char prev_mile;
   serial_flush();
+  
   RFID_Data = "\0";
-  int right_count, left_count;
+ // int right_count, left_count;
   //Serial.println("enter into the code ");
   ble_serial.print("code");
   readAck();
@@ -14,6 +16,7 @@ void code_mode()
     yellow_color();
   }
   ack = '\0';
+    readAck();
   if (ack == '1')
   {
     yellow_color();
@@ -33,12 +36,13 @@ void code_mode()
       button_state();
       if ( start_flag != 1 )
       {
-        RFID_Data = "\0";
+       RFID_Data = "\0";
       }
     }
     ble_char = 1;
     ble_read();
-    delay(50);
+    
+    //delay(100);
     rf_read();
 
     // Serial.println("reading");
@@ -46,12 +50,12 @@ void code_mode()
     // rf_read();
 
 
-    if (  RFID_Data != "START" && startwrong == 0 && start_flag == 0) {
+    if ( RFID_Data != "\0"&& RFID_Data != "START" && startwrong == 0 && start_flag == 0) {
       Serial.println("wrong cmd");
       if (startwrong == 0)
       {
-        delay(1200);
-        ble_serial.print("0x01code0x1dI0x04");
+        //delay(1200);
+        //ble_serial.print("0x01code0x1dI0x04");
         readAck();
         if (ack == 'Z')
         {
@@ -63,14 +67,14 @@ void code_mode()
         readAck();
         if (ack == '1')
         {
-          blue_color();
+         blue_color();
 
 
         }
-        startwrong = 1;
+        ack = '\0';
 
         RFID_Data = "\0";
-        //starttile=1;
+        starttile=1;
       }
     }
 
@@ -78,6 +82,7 @@ void code_mode()
     {
       delay(1200);
       ble_serial.print("0x01code0x1dST0x04");
+        readAck();
       if (ack == 'Z')
       {
         yellow_color();
@@ -88,14 +93,15 @@ void code_mode()
       readAck();
       if (ack == '1')
       {
-        blue_color();
+        //.blue_color();
 
 
       }
       ack = '\0';
+       startwrong = 1;
       starttile = 0;
       //  startwrong=0;
-      RFID_Data = "\0";
+     // RFID_Data = "\0";
     }
 
 
@@ -117,13 +123,14 @@ void code_mode()
             rl_flag = 0;
             rf_read();
             Serial.println(  RFID_Data );
+                      Serial.print("right_count");
+          Serial.println(right_count);
 
-            if (RFID_Data == "FORWARD" && start_flag == 1 || forward_flag == 1 ||
-                ((((prev_mile == 'l' && RFID_Data == "LEFT") || (prev_mile == 'r' && RFID_Data == "RIGHT")) && (RFID_Data != "START" || RFID_Data == "STOP"))
-                 && (left_count < 2 || right_count < 2)))
+            if ((RFID_Data == "FORWARD" && start_flag == 1) || forward_flag == 1 ||
+                ((((prev_mile == 'l' && RFID_Data == "LEFT") || (prev_mile == 'r' && RFID_Data == "RIGHT")) && (RFID_Data != "START" || RFID_Data != "STOP"))
+                 && ((left_count < 2 && left_count >0 ) || (right_count < 2 && right_count > 0) )))
             {
-              //("forward");
-              // encoder(motorp, motorn, 1, 0, 8,2);
+                   
               for_flag = 0;
               green_color();
               forward();
@@ -139,8 +146,10 @@ void code_mode()
               //  rl_flag=0;
               ins_count++;
             }
+            //Special tile reading starts
             else if (RFID_Data == "!")
-            {
+            {//listener =0;
+              special_tile=1;
               ble_serial.print("0x01code0x1d!0x04");
               while (ack != '!')
               {
@@ -156,6 +165,7 @@ void code_mode()
                 if (ack == 'P')
                 {
                   blue_color();
+                  
                 }
                 Serial.print("Ack for special  tile");
                 Serial.println(ack);
@@ -166,10 +176,10 @@ void code_mode()
                   {
                     spec_count++;
                     Serial.println("wrong");
-                    if (spec_count < 4) {
+                    if (spec_count < 3) {
                       ble_serial.print("0x01code0x1dlis0x04");
                     }
-                    else if (spec_count == 4)
+                    else if (spec_count == 3)
                     {
                       break;
                     }
@@ -178,7 +188,7 @@ void code_mode()
               }
               Serial.print("came out ");
               Serial.println(ack);
-              if (spec_count == 4)
+              if (spec_count == 3)
               {
 
                 ble_serial.print("0x01code0x1ddead0x04");
@@ -218,7 +228,184 @@ void code_mode()
               ack = '\0';
               spec_count = 0;
               RFID_Data = "\0" ;
+              special_tile=0;            }
+               else if (RFID_Data == "$")
+            {special_tile=1;
+              ble_serial.print("0x01code0x1d$0x04");
+              while (ack != '$')
+              {
+                readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                if (ack == 'O')
+                {
+                  white_color();
+                }
+                if (ack == 'P')
+                {
+                  blue_color();
+                }
+                Serial.print("Ack for special  tile");
+                Serial.println(ack);
+                {
+
+
+                  if (ack == 'W')
+                  {
+                    spec_count++;
+                    Serial.println("wrong");
+                    if (spec_count < 3) {
+                      ble_serial.print("0x01code0x1dlis0x04");
+                    }
+                    else if (spec_count == 3)
+                    {
+                      break;
+                    }
+                  }
+                }
+              }
+              Serial.print("came out ");
+              Serial.println(ack);
+              if (spec_count == 3)
+              {
+
+                ble_serial.print("0x01code0x1ddead0x04");
+
+
+                ack = '\0';
+                readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                readAck();
+                if (ack == '1')
+                {
+                  //yellow_color();
+
+                  //count = 0;
+                }
+                ack = '\0';
+                Serial.println("error_action");
+                red_color();
+                error_action();
+                
+              }
+              else if (ack == '$')
+              {
+
+                Serial.println("correct action");
+                ins_count++;
+                for_flag = 0;
+                green_color();
+                forward();
+                ble_serial.print("0x01code0x1dSFS0x04"); readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                readAck();
+                if (ack == '1')
+                {
+                  //yellow_color();
+
+                  //count = 0;
+                }
+                
+                for_flag = 0;
+              }
+              ack = '\0';
+              spec_count = 0;
+              RFID_Data = "\0" ;
+              special_tile=0;
             }
+            else if (RFID_Data == "%")
+            { special_tile=1;
+              ble_serial.print("0x01code0x1d%0x04");
+              while (ack != '%')
+              {
+                readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                if (ack == 'O')
+                {
+                  white_color();
+                }
+                if (ack == 'P')
+                {
+                  blue_color();
+                }
+                Serial.print("Ack for special  tile");
+                Serial.println(ack);
+                {
+
+
+                  if (ack == 'W')
+                  {
+                    spec_count++;
+                    Serial.println("wrong");
+                    if (spec_count < 3) {
+                      ble_serial.print("0x01code0x1dlis0x04");
+                    }
+                    else if (spec_count == 3)
+                    {
+                      break;
+                    }
+                  }
+                }
+              }
+              Serial.print("came out ");
+              Serial.println(ack);
+              if (spec_count == 3)
+              {
+
+                ble_serial.print("0x01code0x1ddead0x04");
+
+
+                ack = '\0';
+                readAck();
+                if (ack == 'Z')
+                {
+                  yellow_color();
+                }
+                ack = '\0';
+                readAck();
+                if (ack == '1')
+                {
+                  //yellow_color();
+
+                  //count = 0;
+                }
+                ack = '\0';
+                Serial.println("error_action");
+                red_color();
+                error_action();
+                
+              }
+              else if (ack == '%')
+              {
+
+                Serial.println("correct action");
+                ins_count++;
+                for_flag = 0;
+                green_color();
+                forward();
+                delay(1000);
+                ble_serial.print("0x01code0x1dSFS0x04");
+                for_flag = 0;
+              }
+              ack = '\0';
+              spec_count = 0;
+              RFID_Data = "\0" ;
+              special_tile=0;
+            }
+            
             else
             {
 
@@ -452,7 +639,7 @@ void code_mode()
                 finish_flag = 1;
                 starttile = 1;
                 start_flag = 0;
-                ble_serial.print("0x01code0x1dSS0x04");
+                ble_serial.print("0x01code0x1dfi0x04");
                 readAck();
                 if (ack == 'Z')
                 {
@@ -460,13 +647,18 @@ void code_mode()
                 }
                 ack = '\0';
                 readAck();
-                if (ack == '1')
+                                if (ack == '1')
                 {
-
-
-                  blue_color();
+                  //yellow_color(
+                green_color();
+                for_flag=0;
+                forward();
+                for_flag=1;
+                listener=0;
                 }
                 ack = '\0';
+            blue_color();
+               
                 while (path[j] != '\0')
                 {
                   path[j] = '\0';
@@ -512,14 +704,6 @@ void code_mode()
                 }
               }
               break;
-            case 'D':
-              if (finish_flag == 1)
-              {
-                for_flag = 0;
-                forward();
-                for_flag = 1;
-                ble_serial.print("0x01code0x1dfi0x04");
-              }
             case 'k':
               //;
               rf_read();
@@ -584,6 +768,8 @@ void code_mode()
         }
         Serial.print("what is the count value=");
         Serial.println(count);
+       Serial.print("what is the ins_count value=");
+        Serial.println(ins_count);
         if (ins_count == count && ins_count > 0)
         { prev_mile == '\0';
           prev_mile = path[count - 1];

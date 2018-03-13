@@ -1,6 +1,6 @@
 void recharge()
 {
-   pinMode(sensorPin0, OUTPUT);
+  pinMode(sensorPin0, OUTPUT);
   digitalWrite(sensorPin0, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin0, INPUT_PULLUP);
@@ -24,11 +24,11 @@ void recharge()
   digitalWrite(sensorPin5, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
-      pinMode(sensorPin6, OUTPUT);
+  pinMode(sensorPin6, OUTPUT);
   digitalWrite(sensorPin6, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin6, INPUT_PULLUP);
-      pinMode(sensorPin7, OUTPUT);
+  pinMode(sensorPin7, OUTPUT);
   digitalWrite(sensorPin7, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin7, INPUT_PULLUP);

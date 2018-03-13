@@ -4,16 +4,8 @@ void mode_switch()
 
   if (flag == 1)
   {
-    if (mode_input == "do")
-    {
-      // Serial.print(mode_input)
-      do_flag = 1;
-      Serial.println("do");
-      flag = 0;
 
-      do_mode();
-    }
-    else if (mode_input == "teach")
+    if (mode_input == "teach")
     {
       teach_flag = 1;
       Serial.print(mode_input);
@@ -22,13 +14,6 @@ void mode_switch()
       Serial.println("blue");
       //            digitalWrite(led, HIGH);
       //      digitalWrite(led2,HIGH);
-    }
-    else if (mode_input == "learn")
-    {
-      learn_flag = 1;
-      Serial.print(mode_input);
-      Serial.println("learn");
-      learn();
     }
     else if (mode_input == "play")
     {

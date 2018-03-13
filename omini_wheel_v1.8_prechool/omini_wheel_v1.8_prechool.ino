@@ -10,8 +10,10 @@
 #include <CapacitiveSensor.h>
 //#include <Servo.h>
 SoftwareSerial ble_serial(10, 11);
-int rl_flag=0;
+int rl_flag = 0;
+bool Degree_flag=0;
 //Servo head;
+char prev_mile;
 //SoftwareSerial serial(12, 13);
 #define RST_PIN         5         // Configurable, see typical pin layout above
 #define SS_PIN          53         // Configurable, see typical pin layout above
@@ -19,6 +21,7 @@ int rl_flag=0;
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 //Servo head;
 bool blue_trig;
+static int right_count, left_count;
 const int sensorPin0 = 23;     // the number of the pushbutton pin
 const int sensorPin1 = 22;
 const int sensorPin2 = 25;
@@ -30,6 +33,7 @@ const int sensorPin7 = 35;
 
 static int FLAG, flag1;
 int connect_state;
+bool special_tile=0;
 #define motorp  30
 #define motorn  31
 #define motorp1 32
@@ -44,8 +48,9 @@ int connect_state;
 #define red      3
 #define green    2
 // variables w.ill change:
+//String special_tile[]={"@","#","$","!"};
 int trigger_flag, prev_flag = 1, trigger, forward_flag;
-int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5,sensorState6,sensorState7;   // variable for reading the pushbutton status
+int sensorState0, sensorState1, sensorState2, sensorState3, sensorState4, sensorState5, sensorState6, sensorState7; // variable for reading the pushbutton status
 //input from bluetooth
 char ble_input[100], path[100];
 int i = 0, count = 0, count1 = 0;
@@ -63,9 +68,10 @@ static int counter;
 int button_flag, button_pin;
 static bool listener = 0;
 int ins_count;
+
 CapacitiveSensor   cs_4_2 = CapacitiveSensor(6, 7);
 void setup()
-{  mfrc522.PCD_Init();
+{ mfrc522.PCD_Init();
   Serial.begin(9600);
   ble_serial.begin(9600);
   cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
@@ -117,17 +123,14 @@ void setup()
   digitalWrite(sensorPin5, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin5, INPUT_PULLUP);
-    pinMode(sensorPin6, OUTPUT);
+  pinMode(sensorPin6, OUTPUT);
   digitalWrite(sensorPin6, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin6, INPUT_PULLUP);
-      pinMode(sensorPin7, OUTPUT);
+  pinMode(sensorPin7, OUTPUT);
   digitalWrite(sensorPin7, HIGH);
   delayMicroseconds(10);
   pinMode(sensorPin7, INPUT_PULLUP);
-
-
-  // Serial.println("gred");
 }
 void loop()
 { ////////////////////////////////////////////////////////////////////////////AUTH FOR FUTURE//////////////////////////////////////////////////////////////////////////////////////////////

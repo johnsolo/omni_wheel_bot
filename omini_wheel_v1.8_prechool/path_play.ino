@@ -19,7 +19,8 @@ void direction_()
           //if (ack == '1')
           {
             //delay(2000);
-            working();
+            //            working();
+            green_color();
             go_dance();
             ble_serial.println("0x01play0x1dda0x04");
             ack = '\0';
@@ -38,7 +39,8 @@ void direction_()
             //   if (ack == '1')
             {
               //   Serial.println("its here ");
-              working();
+              //              working();
+              green_color();
               go_forward();
               //delay(100);
               //go_forward();
@@ -95,7 +97,8 @@ void direction_()
           //if (ack == '1')
           {
             //delay(2000);
-            working();
+            //  working();
+            green_color();
             go_left();
             ble_serial.print("0x01play0x1dLS0x04");
             ack = '\0';
@@ -113,7 +116,8 @@ void direction_()
           //Serial.println(ack);
           //    if (ack == '1')
           {
-            working();
+            //working();
+            green_color();
             go_right();
             ble_serial.print("0x01play0x1dRS0x04");
           }
@@ -175,7 +179,7 @@ void direction_()
           //Serial.println(ack);
           //      if (ack == '1'5+)
           {
-            working();
+            green_color();
             go_back();
             ble_serial.println("0x01play0x1dBS0x04");
           }
